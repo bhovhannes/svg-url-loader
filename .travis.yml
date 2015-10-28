@@ -1,0 +1,12 @@
+language: node_js
+
+sudo: false
+
+notifications:
+  email:
+    on_failure: always
+    on_success: change
+
+node_js:
+  - "0.12"
+  - "0.10"
