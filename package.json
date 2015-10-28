@@ -1,0 +1,29 @@
+{
+  "name": "svg-url-loader",
+  "version": "1.0.0",
+  "description": "Converts SVG file to utf-8 encoded data-uri string",
+  "main": "index.js",
+  "scripts": {
+    "test": "exit 0"
+  },
+  "dependencies": {
+    "loader-utils": "0.2.x"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bhovhannes/svg-url-loader.git"
+  },
+  "keywords": [
+    "url-loader",
+    "svg",
+    "utf8",
+    "encoding",
+    "data-uri"
+  ],
+  "author": "Hovhannes Babayan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bhovhannes/svg-url-loader/issues"
+  },
+  "homepage": "https://github.com/bhovhannes/svg-url-loader#readme"
+}
