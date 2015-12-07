@@ -2,9 +2,10 @@
   "name": "svg-url-loader",
   "version": "1.0.0",
   "description": "Converts SVG file to utf-8 encoded data-uri string",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "exit 0"
+    "test": "./node_modules/.bin/_mocha -- test/*.spec.js",
+    "cov": "istanbul cover ./node_modules/.bin/_mocha -- test/*.spec.js"
   },
   "dependencies": {
     "loader-utils": "0.2.x"
@@ -25,5 +26,12 @@
   "bugs": {
     "url": "https://github.com/bhovhannes/svg-url-loader/issues"
   },
-  "homepage": "https://github.com/bhovhannes/svg-url-loader#readme"
+  "homepage": "https://github.com/bhovhannes/svg-url-loader#readme",
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "istanbul": "0.4.1",
+    "mocha": "2.3.4",
+    "object-assign": "^4.0.1",
+    "webpack": "1.12.9"
+  }
 }
