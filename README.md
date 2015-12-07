@@ -1,7 +1,7 @@
 # svg-url-loader
 [![NPM version][npm-version-image]][npm-url] [![NPM downloads][npm-downloads-image]][npm-url] [![MIT License][license-image]][license-url] [![Build Status][travis-image]][travis-url]
 
-Converts SVG file to utf-8 encoded data-uri string.
+A webpack loader which loads SVG file as utf-8 encoded DataUrl string.
 
 Existing [`url-loader`](https://github.com/webpack/url-loader) always does Base64 encoding for data-uri.  As SVG content is a human-readable xml string, using base64 encoding is not mandatory.  Instead, one may only escape [unsafe characters](http://www.ietf.org/rfc/rfc1738.txt) and replace `"` with `'` as described [in this article](http://codepen.io/Tigt/post/optimizing-svgs-in-data-uris).  
 
