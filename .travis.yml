@@ -8,7 +8,6 @@ notifications:
     on_success: change
 
 node_js:
-  - "5.1"
   - "4.2"
   - "0.12"
   - "0.10"
