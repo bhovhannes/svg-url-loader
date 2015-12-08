@@ -28,10 +28,14 @@
   },
   "homepage": "https://github.com/bhovhannes/svg-url-loader#readme",
   "devDependencies": {
-    "expect.js": "^0.3.1",
+    "css-loader": "0.18.0",
+    "expect.js": "0.3.1",
     "istanbul": "0.4.1",
+    "less-loader": "2.2.1",
     "mocha": "2.3.4",
-    "object-assign": "^4.0.1",
+    "node-sass": "3.4.2",
+    "object-assign": "4.0.1",
+    "sass-loader": "3.1.2",
     "webpack": "1.12.9"
   }
 }

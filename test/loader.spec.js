@@ -73,4 +73,68 @@ describe('Loader', function() {
             });
         });
     });
+
+
+    it('should convert SVG file to utf-8 encoded data-uri string, when embedded in LESS file', function(done) {
+        var config = assign({}, globalConfig, {
+            entry: './test/input/less.js',
+        });
+        config.module.loaders[0].query.noquotes = false;
+        config.module.loaders.push({
+            test: /\.less$/,
+            loaders: [
+				'css-loader',
+				'less-loader'
+            ]
+        });
+
+        webpack(config, function(err, stats) {
+            expect(err).to.be(null);
+            fs.readFile(getBundleFile(), function(err, data) {
+                expect(err).to.be(null);
+                var encoded = (0,eval)(data.toString()),
+                    found = false;
+                for(var i=0; i<encoded[0].length; ++i) {
+                    var v = encoded[0][i];
+                    if (typeof v === 'string' && v.indexOf('background-image: url("data:image/svg+xml;charset=utf8,%3Csvg') !== -1) {
+                        found = true;
+                    }
+                }
+                expect(found).to.be(true);
+                return done();
+            });
+        });
+    });
+
+
+    it('should convert SVG file to utf-8 encoded data-uri string, when embedded in SCSS file', function(done) {
+        var config = assign({}, globalConfig, {
+            entry: './test/input/scss.js',
+        });
+        config.module.loaders[0].query.noquotes = false;
+        config.module.loaders.push({
+            test: /\.scss$/,
+            loaders: [
+				'css-loader',
+				'sass-loader'
+            ]
+        });
+
+        webpack(config, function(err, stats) {
+            expect(err).to.be(null);
+            fs.readFile(getBundleFile(), function(err, data) {
+                expect(err).to.be(null);
+                var encoded = (0,eval)(data.toString()),
+                    found = false;
+                for(var i=0; i<encoded[0].length; ++i) {
+                    var v = encoded[0][i];
+                    if (typeof v === 'string' && v.indexOf('background-image: url("data:image/svg+xml;charset=utf8,%3Csvg') !== -1) {
+                        found = true;
+                    }
+                }
+                expect(found).to.be(true);
+                return done();
+            });
+        });
+    });
 });
