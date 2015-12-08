@@ -4,7 +4,7 @@ var assign = require('object-assign');
 var expect = require('expect.js');
 var webpack = require('webpack');
 
-describe('Loader', function() {
+describe('svg-url-loader', function() {
     'use strict';
 
     var outputDir = path.resolve(__dirname, './output'),
@@ -14,6 +14,7 @@ describe('Loader', function() {
         };
     var svgUrlLoader = path.resolve(__dirname, '../');
     var globalConfig = {
+        context: path.resolve(__dirname, '../'),
         output: {
             path: outputDir,
             filename: bundleFileName
