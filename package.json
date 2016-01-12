@@ -30,7 +30,7 @@
   "devDependencies": {
     "css-loader": "0.18.0",
     "expect.js": "0.3.1",
-    "istanbul": "0.4.1",
+    "istanbul": "0.4.2",
     "less-loader": "2.2.2",
     "mocha": "2.3.4",
     "node-sass": "3.4.2",
