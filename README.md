@@ -1,5 +1,5 @@
 # svg-url-loader
-[![NPM version][npm-version-image]][npm-url] [![NPM downloads][npm-downloads-image]][npm-url] [![MIT License][license-image]][license-url] [![Build Status][travis-image]][travis-url]
+[![NPM version][npm-version-image]][npm-url] [![NPM downloads][npm-downloads-image]][npm-url] [![Dependencies][deps-image]][deps-url] [![Dev. Dependencies][dev-deps-image]][dev-deps-url] [![MIT License][license-image]][license-url] [![Build Status][travis-image]][travis-url]
 
 A webpack loader which loads SVG file as utf-8 encoded DataUrl string.
 
@@ -46,6 +46,11 @@ module.exports = {
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
 
+[deps-image]: https://img.shields.io/david/bhovhannes/svg-url-loader.svg
+[deps-url]: https://david-dm.org/bhovhannes/svg-url-loader
+
+[dev-deps-image]: https://img.shields.io/david/dev/bhovhannes/svg-url-loader.svg
+[dev-deps-url]: https://david-dm.org/bhovhannes/svg-url-loader#info=devDependencies
 
 [license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
 [license-url]: LICENSE
