@@ -69,7 +69,7 @@ describe('svg-url-loader', function() {
                 expect(err).to.be(null);
                 var encoded = (0,eval)(data.toString());
                 expect(encoded.indexOf('data:image/svg+xml;charset=utf8,%3Csvg')).to.be(0);
-                expect(encoded.lastIndexOf('svg%3E')).to.be(encoded.length - 'svg%3E'.length - 1);
+                expect(encoded.lastIndexOf('svg%3E')).to.be(encoded.length - 'svg%3E'.length);
                 return done();
             });
         });
