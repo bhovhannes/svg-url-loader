@@ -11,11 +11,12 @@ module.exports = function(content) {
 
 	content = content.toString('utf8');
 	content = content.replace(/"/g, "'");
+	content = content.replace(/\s+/g, " ");
 	content = content.replace(/[{}\|\\\^~\[\]`"<>#%]/g, function(match) {
 		return '%'+match[0].charCodeAt(0).toString(16).toUpperCase();
 	});
 
-	var data = 'data:image/svg+xml;charset=utf8,' + content;
+	var data = 'data:image/svg+xml;charset=utf8,' + content.trim();
 	if (!query.noquotes) {
 		data = '"'+data+'"';
 	}
