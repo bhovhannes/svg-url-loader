@@ -35,7 +35,7 @@
     "mocha": "~2.4.2",
     "node-sass": "~3.4.2",
     "object-assign": "~4.0.1",
-    "sass-loader": "~3.1.2",
+    "sass-loader": "~3.2.0",
     "webpack": "~1.12.11"
   }
 }
