@@ -10,6 +10,13 @@ There are some benefits for choosing utf-8 encoding over base64.
 2. Resulting string will be compressed better when using gzip compression;  
 3. Browser parses utf-8 encoded string faster than its base64 equivalent.
 
+## Supported parameters
+
+The loader supports the following parameters:
+
+`noquotes` - passing this parameter (or setting to `true`) tells to loader *not to include* resulting string in quotes. This can be useful if one wants to use data-url for SVG image as a value for JavaScript variable.
+
+Parameters can be passed both in a url or from webpack config file. See [Using loaders](http://webpack.github.io/docs/using-loaders.html) section in webpack documentation for more details.
 
 ## Usage
 
