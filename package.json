@@ -15,11 +15,13 @@
     "url": "git+https://github.com/bhovhannes/svg-url-loader.git"
   },
   "keywords": [
-    "url-loader",
-    "svg",
-    "utf8",
+    "data-uri",
     "encoding",
-    "data-uri"
+    "loader",
+    "svg",
+    "url-loader",
+    "utf8",
+    "webpack"
   ],
   "author": "Hovhannes Babayan",
   "license": "MIT",
