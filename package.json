@@ -35,8 +35,8 @@
     "istanbul": "~0.4.2",
     "less-loader": "~2.2.2",
     "mocha": "~2.4.2",
-    "node-sass": "~3.5.3",
-    "object-assign": "~4.0.1",
+    "node-sass": "~3.7.0",
+    "object-assign": "~4.1.0",
     "sass-loader": "~3.2.0",
     "webpack": "~1.13.0"
   }
