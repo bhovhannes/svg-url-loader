@@ -8,7 +8,8 @@
     "cov": "istanbul cover ./node_modules/.bin/_mocha -- test/*.spec.js"
   },
   "dependencies": {
-    "loader-utils": "0.2.x"
+    "file-loader": "0.9.0",
+    "loader-utils": "0.2.15"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,7 @@
     "css-loader": "0.18.0",
     "expect.js": "~0.3.1",
     "istanbul": "~0.4.2",
+    "less": "~2.7.1",
     "less-loader": "~2.2.2",
     "mocha": "~2.5.1",
     "node-sass": "~3.8.0",
