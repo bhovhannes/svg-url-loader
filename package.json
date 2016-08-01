@@ -36,7 +36,7 @@
     "istanbul": "~0.4.2",
     "less": "~2.7.1",
     "less-loader": "~2.2.2",
-    "mocha": "~2.5.1",
+    "mocha": "~3.0.0",
     "node-sass": "~3.8.0",
     "object-assign": "~4.1.0",
     "sass-loader": "~4.0.0",
