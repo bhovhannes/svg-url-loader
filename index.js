@@ -25,10 +25,8 @@ module.exports = function(content) {
 			return '%'+match[0].charCodeAt(0).toString(16).toUpperCase();
 		});
 
-		var data = 'data:image/svg+xml;charset=utf8,' + content.trim();
-		if (!query.noquotes) {
-			data = '"'+data+'"';
-		}
+		var data = content.replace(/^module\.exports\s=\s\'(.*)\'$/, '$1').trim();
+		if (!query.noquotes) data = '"'+data+'"';
 
 		return 'module.exports = ' + JSON.stringify(data);
 	}
