@@ -4,6 +4,8 @@ var assign = require('object-assign');
 var expect = require('expect.js');
 var webpack = require('webpack');
 
+var ASYNC_TEST_TIMEOUT = 10000;
+
 describe('svg-url-loader', function() {
     'use strict';
 
@@ -56,7 +58,7 @@ describe('svg-url-loader', function() {
                     return done();
                 });
             });
-        });
+        }, ASYNC_TEST_TIMEOUT);
 
 
         it('should not enclose output in quotes if \'noquotes\' option is specified', function(done) {
@@ -75,7 +77,7 @@ describe('svg-url-loader', function() {
                     return done();
                 });
             });
-        });
+        }, ASYNC_TEST_TIMEOUT);
     });
 
 
@@ -96,7 +98,7 @@ describe('svg-url-loader', function() {
                     return done();
                 });
             });
-        });
+        }, ASYNC_TEST_TIMEOUT);
 
 
         it('should fall back to file-loader if the content of SVG file is longer than "url.dataUrlLimit" option', function(done) {
@@ -117,7 +119,7 @@ describe('svg-url-loader', function() {
                     return done();
                 });
             });
-        });
+        }, ASYNC_TEST_TIMEOUT);
 
 
         it('should fall back to file-loader and prefer limit specified by query parameter to the limit specified by "url.dataUrlLimit" configuration', function(done) {
@@ -140,7 +142,7 @@ describe('svg-url-loader', function() {
                     return done();
                 });
             });
-        });
+        }, ASYNC_TEST_TIMEOUT);
     });
 
 
@@ -174,7 +176,7 @@ describe('svg-url-loader', function() {
                     return done();
                 });
             });
-        });
+        }, ASYNC_TEST_TIMEOUT);
 
 
         it('should convert SVG file to utf-8 encoded data-uri string, when embedded in SCSS file', function(done) {
@@ -206,7 +208,7 @@ describe('svg-url-loader', function() {
                     return done();
                 });
             });
-        });
+        }, ASYNC_TEST_TIMEOUT);
 
 
         it('should convert SVG file to utf-8 encoded data-uri string, when embedded in CSS file', function(done) {
@@ -237,6 +239,6 @@ describe('svg-url-loader', function() {
                     return done();
                 });
             });
-        });
+        }, ASYNC_TEST_TIMEOUT);
     });
 });
