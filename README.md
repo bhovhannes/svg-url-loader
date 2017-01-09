@@ -36,7 +36,7 @@ require("svg-url?prefix=img/!./file.svg");
 //    They are passed to the file-loader if used.
 ```
 
-It is also possible to specify limit using `url.dateUrlLimit` option in webpack configuration.
+It is also possible to specify limit using `url.dataUrlLimit` option in webpack configuration.
 
 ```javascript
 module.exports = {
