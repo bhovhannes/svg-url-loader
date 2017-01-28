@@ -8,7 +8,7 @@
     "cov": "istanbul cover ./node_modules/.bin/_mocha -- test/*.spec.js"
   },
   "dependencies": {
-    "file-loader": "0.9.0",
+    "file-loader": "0.10.0",
     "loader-utils": "0.2.16"
   },
   "repository": {
