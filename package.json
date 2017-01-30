@@ -40,6 +40,6 @@
     "node-sass": "~4.4.0",
     "object-assign": "~4.1.0",
     "sass-loader": "~4.1.0",
-    "webpack": "~1.14.0"
+    "webpack": "~2.2.1"
   }
 }
