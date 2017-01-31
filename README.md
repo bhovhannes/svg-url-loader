@@ -3,7 +3,7 @@
 
 A webpack loader which loads SVG file as utf-8 encoded DataUrl string.
 
-Existing [`url-loader`](https://github.com/webpack/url-loader) always does Base64 encoding for data-uri.  As SVG content is a human-readable xml string, using base64 encoding is not mandatory.  Instead, one may only escape [unsafe characters](http://www.ietf.org/rfc/rfc1738.txt) and replace `"` with `'` as described [in this article](http://codepen.io/Tigt/post/optimizing-svgs-in-data-uris).  
+Existing [`url-loader`](https://github.com/webpack-contrib/url-loader) always does Base64 encoding for data-uri.  As SVG content is a human-readable xml string, using base64 encoding is not mandatory.  Instead, one may only escape [unsafe characters](http://www.ietf.org/rfc/rfc1738.txt) and replace `"` with `'` as described [in this article](http://codepen.io/Tigt/post/optimizing-svgs-in-data-uris).  
 
 There are some benefits for choosing utf-8 encoding over base64.  
 1. Resulting string is shorter (can be ~2 times shorter for 2K-sized icons);  
@@ -12,7 +12,7 @@ There are some benefits for choosing utf-8 encoding over base64.
 
 ## Supported parameters
 
-Parameters can be passed both in a url or from webpack config file. See [Using loaders](http://webpack.github.io/docs/using-loaders.html) section in webpack documentation for more details.
+Parameters can be passed both in a url or from webpack config file. See [Loaders](https://webpack.js.org/concepts/loaders/) section in webpack documentation for more details.
 
 The loader supports the following parameters:
 
@@ -25,7 +25,7 @@ Passing this parameter (or setting to `true`) tells to loader *not to include* r
 
 If given will tell the loader not to encode the source file if its content is greater than this limit.  
 Defaults to no limit.  
-If the file is greater than the limit the [`file-loader`](https://github.com/webpack/file-loader) is used and all query parameters are passed to it.
+If the file is greater than the limit the [`file-loader`](https://github.com/webpack-contrib/file-loader) is used and all query parameters are passed to it.
 
 ``` javascript
 require("svg-url?limit=1024!./file.svg");
@@ -36,28 +36,9 @@ require("svg-url?prefix=img/!./file.svg");
 //    They are passed to the file-loader if used.
 ```
 
-It is also possible to specify limit using `url.dataUrlLimit` option in webpack configuration.
-
-```javascript
-module.exports = {
-    //...
-    url: {
-        dataUrlLimit: 1024 //1kb
-    },
-    module: {
-        loaders: [
-            {test: /\.svg/, loader: 'svg-url-loader'}
-        ]
-    },
-    //...
-};
-```
-
-However, limit specified via query parameter will always override the one specified by `url.dataUrlLimit` configuration.
-
 ## Usage
 
-[Documentation: Using loaders](http://webpack.github.io/docs/using-loaders.html)
+[Documentation: Loaders](https://webpack.js.org/concepts/loaders/)
 
 ### In JS:
 ``` javascript
@@ -78,8 +59,14 @@ require("svg-url?noquotes!./file.svg");
 module.exports = {
   //...
 	module: {
-		loaders: [
-			{test: /\.svg/, loader: 'svg-url-loader'}
+		rules: [
+			{
+			    test: /\.svg/,
+			    use: [
+			        loader: 'svg-url-loader',
+			        options: {}
+			    ]
+			}
 		]
 	},
 	//...
