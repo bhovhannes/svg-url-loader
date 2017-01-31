@@ -4,10 +4,10 @@ var assign = require('object-assign');
 var expect = require('expect.js');
 var webpack = require('webpack');
 
-var ASYNC_TEST_TIMEOUT = 10000;
-
 describe('svg-url-loader', function() {
     'use strict';
+    
+    this.timeout(10000);
 
     var outputDir = path.resolve(__dirname, './output'),
         bundleFileName = 'bundle.js',
@@ -62,7 +62,7 @@ describe('svg-url-loader', function() {
                     return done();
                 });
             });
-        }, ASYNC_TEST_TIMEOUT);
+        });
 
 
         it('should not enclose output in quotes if \'noquotes\' option is specified', function(done) {
@@ -81,7 +81,7 @@ describe('svg-url-loader', function() {
                     return done();
                 });
             });
-        }, ASYNC_TEST_TIMEOUT);
+        });
     });
 
 
@@ -102,7 +102,7 @@ describe('svg-url-loader', function() {
                     return done();
                 });
             });
-        }, ASYNC_TEST_TIMEOUT);
+        });
     });
 
 
@@ -136,7 +136,7 @@ describe('svg-url-loader', function() {
                     return done();
                 });
             });
-        }, ASYNC_TEST_TIMEOUT);
+        });
 
 
         it('should convert SVG file to utf-8 encoded data-uri string, when embedded in SCSS file', function(done) {
@@ -168,7 +168,7 @@ describe('svg-url-loader', function() {
                     return done();
                 });
             });
-        }, ASYNC_TEST_TIMEOUT);
+        });
 
 
         it('should convert SVG file to utf-8 encoded data-uri string, when embedded in CSS file', function(done) {
@@ -199,6 +199,6 @@ describe('svg-url-loader', function() {
                     return done();
                 });
             });
-        }, ASYNC_TEST_TIMEOUT);
+        });
     });
 });
