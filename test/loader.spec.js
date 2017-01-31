@@ -22,12 +22,16 @@ describe('svg-url-loader', function() {
             filename: bundleFileName
         },
         module: {
-            loaders: [
+            rules: [
                 {
                     test: /\.svg/,
-                    loader: svgUrlLoader,
-                    query: {},
-                    exclude: /node_modules/
+                    exclude: /node_modules/,
+                    use: [
+                        {
+							loader: svgUrlLoader,
+							options: {}
+                        }
+                    ]
                 }
             ]
         }
@@ -36,7 +40,7 @@ describe('svg-url-loader', function() {
     // Clean generated cache files before each test so that we can call each test with an empty state.
     afterEach(function(done) {
         fs.unlink(getBundleFile(), done);
-        globalConfig.module.loaders[0].query = {};
+        globalConfig.module.rules[0].use[0].options = {};
     });
 
 
@@ -45,7 +49,7 @@ describe('svg-url-loader', function() {
             var config = assign({}, globalConfig, {
                 entry: './test/input/icon.js'
             });
-            config.module.loaders[0].query.noquotes = false;
+            config.module.rules[0].use[0].options.noquotes = false;
 
             webpack(config, function(err) {
                 expect(err).to.be(null);
@@ -65,7 +69,7 @@ describe('svg-url-loader', function() {
             var config = assign({}, globalConfig, {
                 entry: './test/input/icon.js'
             });
-            config.module.loaders[0].query.noquotes = true;
+            config.module.rules[0].use[0].options.noquotes = true;
 
             webpack(config, function(err) {
                 expect(err).to.be(null);
@@ -86,8 +90,8 @@ describe('svg-url-loader', function() {
             var config = assign({}, globalConfig, {
                 entry: './test/input/icon.js'
             });
-            config.module.loaders[0].query.limit = 10;
-            config.module.loaders[0].query.name = 'foo.svg';
+            config.module.rules[0].use[0].options.limit = 10;
+            config.module.rules[0].use[0].options.name = 'foo.svg';
 
             webpack(config, function(err) {
                 expect(err).to.be(null);
@@ -95,50 +99,6 @@ describe('svg-url-loader', function() {
                     expect(err).to.be(null);
                     var encoded = (0,eval)(data.toString());
                     expect(encoded).to.be('foo.svg');
-                    return done();
-                });
-            });
-        }, ASYNC_TEST_TIMEOUT);
-
-
-        it('should fall back to file-loader if the content of SVG file is longer than "url.dataUrlLimit" option', function(done) {
-            var config = assign({}, globalConfig, {
-                entry: './test/input/icon.js'
-            });
-            config.module.loaders[0].query.name = 'foo.svg';
-            config.url = {
-                dataUrlLimit: 10
-            };
-
-            webpack(config, function(err) {
-                expect(err).to.be(null);
-                fs.readFile(getBundleFile(), function(err, data) {
-                    expect(err).to.be(null);
-                    var encoded = (0,eval)(data.toString());
-                    expect(encoded).to.be('foo.svg');
-                    return done();
-                });
-            });
-        }, ASYNC_TEST_TIMEOUT);
-
-
-        it('should fall back to file-loader and prefer limit specified by query parameter to the limit specified by "url.dataUrlLimit" configuration', function(done) {
-            var config = assign({}, globalConfig, {
-                entry: './test/input/icon.js'
-            });
-            config.module.loaders[0].query.limit = 100000000;
-            config.url = {
-                dataUrlLimit: 10
-            };
-
-            webpack(config, function(err) {
-                expect(err).to.be(null);
-                fs.readFile(getBundleFile(), function(err, data) {
-                    expect(err).to.be(null);
-                    var encoded = (0,eval)(data.toString());
-                    expect(encoded.indexOf('"')).to.be(0);
-                    expect(encoded.lastIndexOf('"')).to.be(encoded.length - 1);
-                    expect(encoded.indexOf('data:image/svg+xml;charset=utf8,%3Csvg')).to.be(1);
                     return done();
                 });
             });
@@ -151,13 +111,13 @@ describe('svg-url-loader', function() {
             var config = assign({}, globalConfig, {
                 entry: './test/input/less.js'
             });
-            config.module.loaders[0].query.noquotes = false;
-            config.module.loaders.push({
+            config.module.rules[0].use[0].options.noquotes = false;
+            config.module.rules.push({
                 test: /\.less$/,
-                loaders: [
+                use: [
                     'css-loader',
                     'less-loader'
-                ]
+	             ]
             });
 
             webpack(config, function(err) {
@@ -183,10 +143,10 @@ describe('svg-url-loader', function() {
             var config = assign({}, globalConfig, {
                 entry: './test/input/scss.js'
             });
-            config.module.loaders[0].query.noquotes = false;
-            config.module.loaders.push({
+            config.module.rules[0].use[0].options.noquotes = false;
+            config.module.rules.push({
                 test: /\.scss$/,
-                loaders: [
+                use: [
                     'css-loader',
                     'sass-loader'
                 ]
@@ -215,10 +175,10 @@ describe('svg-url-loader', function() {
             var config = assign({}, globalConfig, {
                 entry: './test/input/css.js'
             });
-            config.module.loaders[0].query.noquotes = false;
-            config.module.loaders.push({
+            config.module.rules[0].use[0].options.noquotes = false;
+            config.module.rules.push({
                 test: /\.css$/,
-                loaders: [
+                use: [
                     'css-loader'
                 ]
             });
