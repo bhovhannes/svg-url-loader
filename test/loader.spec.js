@@ -58,7 +58,7 @@ describe('svg-url-loader', function() {
                     var encoded = (0,eval)(data.toString());
                     expect(encoded.indexOf('"')).to.be(0);
                     expect(encoded.lastIndexOf('"')).to.be(encoded.length - 1);
-                    expect(encoded.indexOf('data:image/svg+xml;charset=utf8,%3Csvg')).to.be(1);
+                    expect(encoded.indexOf('data:image/svg+xml,%3Csvg')).to.be(1);
                     return done();
                 });
             });
@@ -76,7 +76,7 @@ describe('svg-url-loader', function() {
                 fs.readFile(getBundleFile(), function(err, data) {
                     expect(err).to.be(null);
                     var encoded = (0,eval)(data.toString());
-                    expect(encoded.indexOf('data:image/svg+xml;charset=utf8,%3Csvg')).to.be(0);
+                    expect(encoded.indexOf('data:image/svg+xml,%3Csvg')).to.be(0);
                     expect(encoded.lastIndexOf('svg%3E')).to.be(encoded.length - 'svg%3E'.length);
                     return done();
                 });
@@ -128,7 +128,7 @@ describe('svg-url-loader', function() {
                         found = false;
                     for(var i=0; i<encoded[0].length; ++i) {
                         var v = encoded[0][i];
-                        if (typeof v === 'string' && v.indexOf('background-image: url("data:image/svg+xml;charset=utf8,%3Csvg') !== -1) {
+                        if (typeof v === 'string' && v.indexOf('background-image: url("data:image/svg+xml,%3Csvg') !== -1) {
                             found = true;
                         }
                     }
@@ -160,7 +160,7 @@ describe('svg-url-loader', function() {
                         found = false;
                     for(var i=0; i<encoded[0].length; ++i) {
                         var v = encoded[0][i];
-                        if (typeof v === 'string' && v.indexOf('background-image: url("data:image/svg+xml;charset=utf8,%3Csvg') !== -1) {
+                        if (typeof v === 'string' && v.indexOf('background-image: url("data:image/svg+xml,%3Csvg') !== -1) {
                             found = true;
                         }
                     }
@@ -191,7 +191,7 @@ describe('svg-url-loader', function() {
                         found = false;
                     for(var i=0; i<encoded[0].length; ++i) {
                         var v = encoded[0][i];
-                        if (typeof v === 'string' && v.indexOf('background-image: url("data:image/svg+xml;charset=utf8,%3Csvg') !== -1) {
+                        if (typeof v === 'string' && v.indexOf('background-image: url("data:image/svg+xml,%3Csvg') !== -1) {
                             found = true;
                         }
                     }
