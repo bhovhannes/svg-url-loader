@@ -7,7 +7,7 @@ var loaderUtils = require('loader-utils');
 module.exports = function(content) {
 	this.cacheable && this.cacheable();
 
-	var query = loaderUtils.parseQuery(this.query);
+	var query = loaderUtils.getOptions(this);
 	
 	var limit = query.limit ? parseInt(query.limit, 10) : 0;
 	
