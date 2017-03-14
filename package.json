@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "file-loader": "0.10.1",
-    "loader-utils": "1.0.3"
+    "loader-utils": "1.0.4"
   },
   "repository": {
     "type": "git",
