@@ -28,10 +28,10 @@ Defaults to no limit.
 If the file is greater than the limit the [`file-loader`](https://github.com/webpack-contrib/file-loader) is used and all query parameters are passed to it.
 
 ``` javascript
-require("svg-url?limit=1024!./file.svg");
+require('svg-url-loader?limit=1024!./file.svg');
 // => DataUrl if "file.png" is smaller that 1kb
 
-require("svg-url?prefix=img/!./file.svg");
+require('svg-url-loader?prefix=img/!./file.svg');
 // => Parameters for the file-loader are valid too
 //    They are passed to the file-loader if used.
 ```
@@ -42,10 +42,10 @@ require("svg-url?prefix=img/!./file.svg");
 
 ### In JS:
 ``` javascript
-require("svg-url!./file.svg");
+require('svg-url-loader!./file.svg');
 // => DataUrl for file.svg, enclosed in quotes
 
-require("svg-url?noquotes!./file.svg");
+require('svg-url-loader?noquotes!./file.svg');
 // => DataUrl for file.svg, without quotes
 ```
 
