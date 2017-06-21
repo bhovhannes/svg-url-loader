@@ -3,11 +3,11 @@
 
 A webpack loader which loads SVG file as utf-8 encoded DataUrl string.
 
-Existing [`url-loader`](https://github.com/webpack-contrib/url-loader) always does Base64 encoding for data-uri.  As SVG content is a human-readable xml string, using base64 encoding is not mandatory.  Instead, one may only escape [unsafe characters](http://www.ietf.org/rfc/rfc1738.txt) and replace `"` with `'` as described [in this article](http://codepen.io/Tigt/post/optimizing-svgs-in-data-uris).  
+Existing [`url-loader`](https://github.com/webpack-contrib/url-loader) always does Base64 encoding for data-uri.  As SVG content is a human-readable xml string, using base64 encoding is not mandatory.  Instead, one may only escape [unsafe characters](http://www.ietf.org/rfc/rfc1738.txt) and replace `"` with `'` as described [in this article](http://codepen.io/Tigt/post/optimizing-svgs-in-data-uris).
 
-There are some benefits for choosing utf-8 encoding over base64.  
-1. Resulting string is shorter (can be ~2 times shorter for 2K-sized icons);  
-2. Resulting string will be compressed better when using gzip compression;  
+There are some benefits for choosing utf-8 encoding over base64.
+1. Resulting string is shorter (can be ~2 times shorter for 2K-sized icons);
+2. Resulting string will be compressed better when using gzip compression;
 3. Browser parses utf-8 encoded string faster than its base64 equivalent.
 
 ## Supported parameters
@@ -23,8 +23,8 @@ Passing this parameter (or setting to `true`) tells to loader *not to include* r
 
 ### `limit`
 
-If given will tell the loader not to encode the source file if its content is greater than this limit.  
-Defaults to no limit.  
+If given will tell the loader not to encode the source file if its content is greater than this limit.
+Defaults to no limit.
 If the file is greater than the limit the [`file-loader`](https://github.com/webpack-contrib/file-loader) is used and all query parameters are passed to it.
 
 ``` javascript
@@ -34,6 +34,15 @@ require('svg-url-loader?limit=1024!./file.svg');
 require('svg-url-loader?prefix=img/!./file.svg');
 // => Parameters for the file-loader are valid too
 //    They are passed to the file-loader if used.
+```
+
+### `stripdeclarations`
+
+If given will tell the loader to strip out any XML declaration, e.g. `<?xml version="1.0" encoding="UTF-8"?>` at the beginning of imported SVGs.
+Internet Explorer (tested in Edge 14) cannot handle XML declarations in CSS data URLs (`content: url("data:image/svg...")`).
+
+``` javascript
+require('svg-url-loader?stripdeclarations!./file.svg');
 ```
 
 ## Usage
