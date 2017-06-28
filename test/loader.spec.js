@@ -6,7 +6,7 @@ var webpack = require('webpack');
 
 describe('svg-url-loader', function() {
     'use strict';
-    
+
     this.timeout(10000);
 
     var outputDir = path.resolve(__dirname, './output'),
@@ -83,6 +83,65 @@ describe('svg-url-loader', function() {
             });
         });
     });
+
+
+    describe('"stripdeclarations" option', function () {
+        it('if turned off - should do nothing to an SVG that has an XML declaration', function(done) {
+            var config = assign({}, globalConfig, {
+                entry: './test/input/icon-with-declaration.js'
+            });
+            config.module.rules[0].use[0].options.stripdeclarations = false;
+
+            webpack(config, function(err) {
+                expect(err).to.be(null);
+                fs.readFile(getBundleFile(), function(err, data) {
+                    expect(err).to.be(null);
+                    var encoded = (0,eval)(data.toString());
+                    expect(encoded.indexOf("%3C?xml version='1.0' encoding='UTF-8'?%3E")).to.be.greaterThan(-1);
+                    return done();
+                });
+            });
+        });
+
+        it('if turned on - should do nothing to an SVG that doesn\'t have an XML declaration', function(done) {
+            var config = assign({}, globalConfig, {
+                entry: './test/input/icon.js'
+            });
+            config.module.rules[0].use[0].options.stripdeclarations = true;
+
+            webpack(config, function(err) {
+                expect(err).to.be(null);
+                fs.readFile(getBundleFile(), function(err, data) {
+                    expect(err).to.be(null);
+                    var encoded = (0,eval)(data.toString());
+                    expect(encoded.indexOf('"')).to.be(0);
+                    expect(encoded.lastIndexOf('"')).to.be(encoded.length - 1);
+                    expect(encoded.indexOf('data:image/svg+xml,%3Csvg')).to.be(1);
+                    return done();
+                });
+            });
+        });
+
+
+        it('if turned on - should remove XML declaration from a file that has one', function(done) {
+            var config = assign({}, globalConfig, {
+                entry: './test/input/icon-with-declaration.js'
+            });
+            config.module.rules[0].use[0].options.stripdeclarations = true;
+
+            webpack(config, function(err) {
+                expect(err).to.be(null);
+                fs.readFile(getBundleFile(), function(err, data) {
+                    expect(err).to.be(null);
+                    var encoded = (0,eval)(data.toString());
+                    expect(encoded.indexOf('%3C?xml version="1.0" encoding="UTF-8"?%3E')).to.be(-1);
+                    expect(encoded.indexOf('data:image/svg+xml,%3Csvg')).to.be(1);
+                    return done();
+                });
+            });
+        });
+    });
+
 
 
     describe('"limit" option and "url.dataUrlLimit" configuration', function () {
