@@ -260,4 +260,62 @@ describe('svg-url-loader', function() {
             });
         });
     });
+
+    describe('"ieSafe" option skips styled files encoded to more than 4kB', function () {
+        it('should encode file below limit', function(done) {
+            var config = assign({}, globalConfig, {
+                entry: './test/input/4047B-encoded-styled.js'
+            });
+            config.module.rules[0].use[0].options.ieSafe = true;
+            config.module.rules[0].use[0].options.noquotes = true;
+
+            webpack(config, function(err) {
+                expect(err).to.be(null);
+                fs.readFile(getBundleFile(), function(err, data) {
+                    expect(err).to.be(null);
+                    var encoded = (0,eval)(data.toString());
+                    expect(encoded.indexOf('data:image/svg+xml,%3Csvg')).to.be(0);
+                    expect(encoded.length).to.be.below(4096)
+                    return done();
+                });
+            });
+        });
+
+        it('should encode file above limit without style-element', function(done) {
+            var config = assign({}, globalConfig, {
+                entry: './test/input/4104B-encoded-unstyled.js'
+            });
+            config.module.rules[0].use[0].options.ieSafe = true;
+            config.module.rules[0].use[0].options.noquotes = true;
+
+            webpack(config, function(err) {
+                expect(err).to.be(null);
+                fs.readFile(getBundleFile(), function(err, data) {
+                    expect(err).to.be(null);
+                    var encoded = (0,eval)(data.toString());
+                    expect(encoded.indexOf('data:image/svg+xml,%3Csvg')).to.be(0);
+                    expect(encoded.length).to.be.above(4096)
+                    return done();
+                });
+            });
+        });
+
+        it('should fall back on file above limit with style-element', function(done) {
+            var config = assign({}, globalConfig, {
+                entry: './test/input/4099B-encoded-styled.js'
+            });
+            config.module.rules[0].use[0].options.ieSafe = true;
+            config.module.rules[0].use[0].options.name = 'foo.svg';
+
+            webpack(config, function(err) {
+                expect(err).to.be(null);
+                fs.readFile(getBundleFile(), function(err, data) {
+                    expect(err).to.be(null);
+                    var encoded = (0,eval)(data.toString());
+                    expect(encoded).to.be('foo.svg');
+                    return done();
+                });
+            });
+        });
+    });
 });
