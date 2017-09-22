@@ -261,12 +261,12 @@ describe('svg-url-loader', function() {
         });
     });
 
-    describe('"ieSafe" option skips styled files encoded to more than 4kB', function () {
+    describe('"iesafe" option skips styled files encoded to more than 4kB', function () {
         it('should encode file below limit', function(done) {
             var config = assign({}, globalConfig, {
                 entry: './test/input/4047B-encoded-styled.js'
             });
-            config.module.rules[0].use[0].options.ieSafe = true;
+            config.module.rules[0].use[0].options.iesafe = true;
             config.module.rules[0].use[0].options.noquotes = true;
 
             webpack(config, function(err) {
@@ -285,7 +285,7 @@ describe('svg-url-loader', function() {
             var config = assign({}, globalConfig, {
                 entry: './test/input/4104B-encoded-unstyled.js'
             });
-            config.module.rules[0].use[0].options.ieSafe = true;
+            config.module.rules[0].use[0].options.iesafe = true;
             config.module.rules[0].use[0].options.noquotes = true;
 
             webpack(config, function(err) {
@@ -304,7 +304,7 @@ describe('svg-url-loader', function() {
             var config = assign({}, globalConfig, {
                 entry: './test/input/4099B-encoded-styled.js'
             });
-            config.module.rules[0].use[0].options.ieSafe = true;
+            config.module.rules[0].use[0].options.iesafe = true;
             config.module.rules[0].use[0].options.name = 'foo.svg';
 
             webpack(config, function(err) {

@@ -45,14 +45,14 @@ Internet Explorer (tested in Edge 14) cannot handle XML declarations in CSS data
 require('svg-url-loader?stripdeclarations!./file.svg');
 ```
 
-### `ieSafe`
+### `iesafe`
 
 This option falls back to the file-loader if the file contains a style-element and the encoded size is above 4kB no matter the `limit` specified.
 
 Internet Explorer (including IE11) stops parsing style-elements in SVG data-URIs longer than 4kB. This results in black fill-color for all styled shapes.
 
 ``` javascript
-require('svg-url-loader?ieSafe!./file.svg');
+require('svg-url-loader?iesafe!./file.svg');
 ```
 
 ## Usage

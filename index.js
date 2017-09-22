@@ -28,7 +28,7 @@ module.exports = function(content) {
 
 		var data = 'data:image/svg+xml,' + content.trim();
 
-		if (!(query.ieSafe && hasStyleElement && data.length > 4096)) {
+		if (!(query.iesafe && hasStyleElement && data.length > 4096)) {
 			if (!query.noquotes) {
 				data = '"'+data+'"';
 			}
