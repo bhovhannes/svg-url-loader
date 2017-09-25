@@ -14,6 +14,8 @@ module.exports = function(content) {
 	if (limit <= 0 || content.length < limit) {
 		content = content.toString('utf8');
 
+		var hasStyleElement = /<style.*?>.*?<\/style>/i.test(content)
+
 		if (query.stripdeclarations) {
 			content = content.replace(/^\s*<\?xml [^>]*>\s*/i, "");
 		}
@@ -25,16 +27,18 @@ module.exports = function(content) {
 		});
 
 		var data = 'data:image/svg+xml,' + content.trim();
-		if (!query.noquotes) {
-			data = '"'+data+'"';
-		}
 
-		return 'module.exports = ' + JSON.stringify(data);
+		if (!(query.iesafe && hasStyleElement && data.length > 4096)) {
+			if (!query.noquotes) {
+				data = '"'+data+'"';
+			}
+
+			return 'module.exports = ' + JSON.stringify(data);
+		}
 	}
-	else {
-		var fileLoader = require('file-loader');
-		return fileLoader.call(this, content);
-	}
+
+	var fileLoader = require('file-loader');
+	return fileLoader.call(this, content);
 };
 
 module.exports.raw = true;
