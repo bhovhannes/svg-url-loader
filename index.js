@@ -12,21 +12,21 @@ module.exports = function(content) {
 	var limit = query.limit ? parseInt(query.limit, 10) : 0;
 
 	if (limit <= 0 || content.length < limit) {
-		content = content.toString('utf8');
+		var newContent = content.toString('utf8');
 
-		var hasStyleElement = /<style.*?>.*?<\/style>/i.test(content)
+		var hasStyleElement = /<style.*?>.*?<\/style>/i.test(newContent)
 
 		if (query.stripdeclarations) {
-			content = content.replace(/^\s*<\?xml [^>]*>\s*/i, "");
+			newContent = newContent.replace(/^\s*<\?xml [^>]*>\s*/i, "");
 		}
 
-		content = content.replace(/"/g, "'");
-		content = content.replace(/\s+/g, " ");
-		content = content.replace(/[{}\|\\\^~\[\]`"<>#%]/g, function(match) {
+		newContent = newContent.replace(/"/g, "'");
+		newContent = newContent.replace(/\s+/g, " ");
+		newContent = newContent.replace(/[{}\|\\\^~\[\]`"<>#%]/g, function(match) {
 			return '%'+match[0].charCodeAt(0).toString(16).toUpperCase();
 		});
 
-		var data = 'data:image/svg+xml,' + content.trim();
+		var data = 'data:image/svg+xml,' + newContent.trim();
 
 		if (!(query.iesafe && hasStyleElement && data.length > 4096)) {
 			if (!query.noquotes) {
