@@ -8,6 +8,7 @@ module.exports = function(content) {
 	this.cacheable && this.cacheable();
 
 	var query = loaderUtils.getOptions(this) || {};
+	query.encoding = query.encoding || "none";
 
 	var limit = query.limit ? parseInt(query.limit, 10) : 0;
 
@@ -21,7 +22,7 @@ module.exports = function(content) {
 		}
 
 		var data;
-		if (query.base64) {
+		if (query.encoding === "base64") {
 			if (typeof newContent === "string") {
 				newContent = new Buffer(newContent);
 			}
@@ -38,7 +39,7 @@ module.exports = function(content) {
 		}
 
 		if (!(query.iesafe && hasStyleElement && data.length > 4096)) {
-			if (!query.base64 && !query.noquotes) {
+			if (query.encoding === "none" && !query.noquotes) {
 				data = '"'+data+'"';
 			}
 

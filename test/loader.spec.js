@@ -324,7 +324,7 @@ describe('svg-url-loader', function() {
             });
             config.module.rules[0].use[0].options.iesafe = true;
             config.module.rules[0].use[0].options.name = 'foo.svg';
-            config.module.rules[0].use[0].options.base64 = true;
+            config.module.rules[0].use[0].options.encoding = "base64";
 
             webpack(config, function(err) {
                 expect(err).to.be(null);
@@ -338,12 +338,12 @@ describe('svg-url-loader', function() {
         });
     });
 
-    describe("base64", function() {
+    describe("encoding is base64", function() {
         it('should convert SVG file to base64 encoded data-uri string', function(done) {
             var config = assign({}, globalConfig, {
                 entry: './test/input/icon.js'
             });
-            config.module.rules[0].use[0].options.base64 = true;
+            config.module.rules[0].use[0].options.encoding = "base64";
 
             webpack(config, function(err) {
                 expect(err).to.be(null);
