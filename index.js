@@ -8,6 +8,7 @@ module.exports = function(content) {
 	this.cacheable && this.cacheable();
 
 	var query = loaderUtils.getOptions(this) || {};
+	query.encoding = query.encoding || "none";
 
 	var limit = query.limit ? parseInt(query.limit, 10) : 0;
 
@@ -20,16 +21,25 @@ module.exports = function(content) {
 			newContent = newContent.replace(/^\s*<\?xml [^>]*>\s*/i, "");
 		}
 
-		newContent = newContent.replace(/"/g, "'");
-		newContent = newContent.replace(/\s+/g, " ");
-		newContent = newContent.replace(/[{}\|\\\^~\[\]`"<>#%]/g, function(match) {
-			return '%'+match[0].charCodeAt(0).toString(16).toUpperCase();
-		});
+		var data;
+		if (query.encoding === "base64") {
+			if (typeof newContent === "string") {
+				newContent = new Buffer(newContent);
+			}
+			data = "data:image/svg+xml;base64," + newContent.toString("base64");
+		} else {
+			newContent = newContent.replace(/"/g, "'");
+			newContent = newContent.replace(/\s+/g, " ");
+			newContent = newContent.replace(/[{}\|\\\^~\[\]`"<>#%]/g, function(match) {
+				return '%'+match[0].charCodeAt(0).toString(16).toUpperCase();
+			});
 
-		var data = 'data:image/svg+xml,' + newContent.trim();
+			data = 'data:image/svg+xml,' + newContent.trim();
+
+		}
 
 		if (!(query.iesafe && hasStyleElement && data.length > 4096)) {
-			if (!query.noquotes) {
+			if (query.encoding === "none" && !query.noquotes) {
 				data = '"'+data+'"';
 			}
 

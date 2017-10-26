@@ -55,6 +55,16 @@ Internet Explorer (including IE11) stops parsing style-elements in SVG data-URIs
 require('svg-url-loader?iesafe!./file.svg');
 ```
 
+### `encoding`
+
+This option controls which encoding to use when constructing a data-URI for an SVG. When set to a non-"none" value, quotes are never applied to the outputted data-URI. 
+
+Possible values are "base64" and "none". Defaults to "none".
+
+``` javascript
+require('svg-url-loader?encoding=base64!./file.svg');
+```
+
 ## Usage
 
 [Documentation: Loaders](https://webpack.js.org/concepts/loaders/)

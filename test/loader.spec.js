@@ -317,5 +317,45 @@ describe('svg-url-loader', function() {
                 });
             });
         });
+
+        it('should fall back on file above limit with style-element even when base64 encoding', function(done) {
+            var config = assign({}, globalConfig, {
+                entry: './test/input/4099B-encoded-styled.js'
+            });
+            config.module.rules[0].use[0].options.iesafe = true;
+            config.module.rules[0].use[0].options.name = 'foo.svg';
+            config.module.rules[0].use[0].options.encoding = "base64";
+
+            webpack(config, function(err) {
+                expect(err).to.be(null);
+                fs.readFile(getBundleFile(), function(err, data) {
+                    expect(err).to.be(null);
+                    var encoded = (0,eval)(data.toString());
+                    expect(encoded).to.be('foo.svg');
+                    return done();
+                });
+            });
+        });
+    });
+
+    describe("encoding is base64", function() {
+        it('should convert SVG file to base64 encoded data-uri string', function(done) {
+            var config = assign({}, globalConfig, {
+                entry: './test/input/icon.js'
+            });
+            config.module.rules[0].use[0].options.encoding = "base64";
+
+            webpack(config, function(err) {
+                expect(err).to.be(null);
+                fs.readFile(getBundleFile(), function(err, data) {
+                    expect(err).to.be(null);
+                    var encoded = (0,eval)(data.toString());
+                    expect(encoded.indexOf('"')).to.be(-1);
+                    expect(encoded.lastIndexOf('"')).to.be(-1);
+                    expect(encoded.indexOf('data:image/svg+xml;base64')).to.be(0);
+                    return done();
+                });
+            });
+        });
     });
 });
