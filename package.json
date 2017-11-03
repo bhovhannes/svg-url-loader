@@ -38,7 +38,7 @@
     "less": "~2.7.2",
     "less-loader": "~3.0.0",
     "mocha": "~4.0.0",
-    "node-sass": "~4.5.0",
+    "node-sass": "~4.6.0",
     "object-assign": "~4.1.0",
     "sass-loader": "~6.0.0",
     "webpack": "~3.8.0"
