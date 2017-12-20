@@ -15,7 +15,7 @@ module.exports = function(content) {
 	if (limit <= 0 || content.length < limit) {
 		var newContent = content.toString('utf8');
 
-		var hasStyleElement = /<style.*?>.*?<\/style>/i.test(newContent)
+		var hasStyleElement = /<style[\s\S]*?>[\s\S]*?<\/style>/i.test(newContent)
 
 		if (query.stripdeclarations) {
 			newContent = newContent.replace(/^\s*<\?xml [^>]*>\s*/i, "");
