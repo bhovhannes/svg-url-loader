@@ -8,8 +8,8 @@ notifications:
     on_success: change
 
 node_js:
-  - '4'
   - "6"
+  - "8"
 
 env:
   - CXX=g++-4.8
