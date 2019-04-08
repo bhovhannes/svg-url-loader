@@ -1,6 +1,6 @@
 language: node_js
 
-sudo: false
+dist: trusty
 
 notifications:
   email:
@@ -10,14 +10,6 @@ notifications:
 node_js:
   - "6"
   - "8"
-
-env:
-  - CXX=g++-4.8
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.8
+  - "lts/*"
 
 after_success: npm run coverage
