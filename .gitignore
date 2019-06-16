@@ -4,6 +4,9 @@
 # Logs
 *.log
 
+# MacOS garbage
+.DS_Store
+
 # Coverage directory used by tools like istanbul
 coverage
 
