@@ -38,13 +38,19 @@ module.exports = function(content) {
 
 		}
 
-		if (!(query.iesafe && hasStyleElement && data.length > 4096)) {
+		if (query.iesafe && hasStyleElement && data.length > 4096) {
+			if (query.emitWarnings) {
+				this.emitWarning(`Content was not processed, as 'iesafe' option is active.`);
+			}
+		} else {
 			if (query.encoding === "none" && !query.noquotes) {
 				data = '"'+data+'"';
 			}
 
 			return 'module.exports = ' + JSON.stringify(data);
 		}
+	} else if (query.emitWarnings) {
+		this.emitWarning(`Content size (${content.length} byte) is over the limit of ${limit} byte.`)
 	}
 
 	var fileLoader = require('file-loader');

@@ -65,6 +65,14 @@ Possible values are "base64" and "none". Defaults to "none".
 require('svg-url-loader?encoding=base64!./file.svg');
 ```
 
+### `emitWarnings`
+
+This option helps to identify unprocessed files. This can happen, if the `limit` and/or `iesafe` options are active. 
+
+``` javascript
+require('svg-url-loader?emitWarnings!./file.svg');
+```
+
 ## Usage
 
 [Documentation: Loaders](https://webpack.js.org/concepts/loaders/)
