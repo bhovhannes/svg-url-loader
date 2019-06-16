@@ -119,5 +119,5 @@ MIT (http://www.opensource.org/licenses/mit-license.php)
 [npm-version-image]: https://img.shields.io/npm/v/svg-url-loader.svg?style=flat
 [npm-downloads-image]: https://img.shields.io/npm/dm/svg-url-loader.svg?style=flat
 
-[travis-url]: https://travis-ci.org/bhovhannes/svg-url-loader
+[travis-url]: https://travis-ci.com/bhovhannes/svg-url-loader
 [travis-image]: https://img.shields.io/travis/bhovhannes/svg-url-loader.svg?style=flat
