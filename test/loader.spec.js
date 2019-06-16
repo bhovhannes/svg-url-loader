@@ -2,20 +2,21 @@ const fs = require('fs')
 const path = require('path')
 const webpack = require('webpack')
 
-jest.setTimeout(10000)
-
-const svgUrlLoader = path.resolve(__dirname, '../src/loader.js')
 
 describe('svg-url-loader', function() {
+    
+    const svgUrlLoader = path.resolve(__dirname, '../src/loader.js')
     
     const outputDir = path.resolve(__dirname, './output'),
         bundleFileName = 'bundle.js',
         getBundleFile = function() {
             return path.join(outputDir, bundleFileName)
         }
+        
+    const context = path.resolve(__dirname, '../')
     
-    const globalConfig = {
-        context: path.resolve(__dirname, '../'),
+    const getBaseWebpackConfig = () => ({
+        context,
         mode: 'development',
 		output: {
             path: outputDir,
@@ -35,19 +36,18 @@ describe('svg-url-loader', function() {
                 }
             ]
         }
-    }
+    })
 
     // Clean generated cache files before each test so that we can call each test with an empty state.
     afterEach(function(done) {
         fs.unlink(getBundleFile(), done)
-        globalConfig.module.rules[0].use[0].options = {}
     })
 
 
     describe('"noquotes" option', function () {
         it('should convert SVG file to utf-8 encoded data-uri string, enclosed in quotes', function(done) {
             const config = {
-                ...globalConfig,
+                ...getBaseWebpackConfig(),
                 entry: './test/input/icon.js'
             }
             config.module.rules[0].use[0].options.noquotes = false
@@ -67,7 +67,7 @@ describe('svg-url-loader', function() {
 
         it('should not enclose output in quotes if \'noquotes\' option is specified', function(done) {
             const config = {
-                ...globalConfig,
+                ...getBaseWebpackConfig(),
                 entry: './test/input/icon.js'
             }
             config.module.rules[0].use[0].options.noquotes = true
@@ -89,7 +89,7 @@ describe('svg-url-loader', function() {
     describe('"stripdeclarations" option', function () {
         it('if turned off - should do nothing to an SVG that has an XML declaration', function(done) {
             const config = {
-                ...globalConfig, 
+                ...getBaseWebpackConfig(), 
                 entry: './test/input/icon-with-declaration.js'
             }
             config.module.rules[0].use[0].options.stripdeclarations = false
@@ -107,7 +107,7 @@ describe('svg-url-loader', function() {
 
         it('if turned on - should do nothing to an SVG that doesn\'t have an XML declaration', function(done) {
             const config = {
-                ...globalConfig,
+                ...getBaseWebpackConfig(),
                 entry: './test/input/icon.js'
             }
             config.module.rules[0].use[0].options.stripdeclarations = true
@@ -128,7 +128,7 @@ describe('svg-url-loader', function() {
 
         it('if turned on - should remove XML declaration from a file that has one', function(done) {
             const config = {
-                ...globalConfig,
+                ...getBaseWebpackConfig(),
                 entry: './test/input/icon-with-declaration.js'
             }
             config.module.rules[0].use[0].options.stripdeclarations = true
@@ -151,7 +151,7 @@ describe('svg-url-loader', function() {
     describe('"limit" option and "url.dataUrlLimit" configuration', function () {
         it('should fall back to file-loader if the content of SVG file is longer than "limit" query parameter', function(done) {
             const config = {
-                ...globalConfig,
+                ...getBaseWebpackConfig(),
                 entry: './test/input/icon.js'
             }
             config.module.rules[0].use[0].options.limit = 10
@@ -173,7 +173,7 @@ describe('svg-url-loader', function() {
     describe('combining with other loaders', function () {
         it('should convert SVG file to utf-8 encoded data-uri string, when embedded in LESS file', function(done) {
             const config = {
-                ...globalConfig,
+                ...getBaseWebpackConfig(),
                 entry: './test/input/less.js'
             }
             config.module.rules[0].use[0].options.noquotes = false
@@ -206,7 +206,7 @@ describe('svg-url-loader', function() {
 
         it('should convert SVG file to utf-8 encoded data-uri string, when embedded in SCSS file', function(done) {
             const config = {
-                ...globalConfig,
+                ...getBaseWebpackConfig(),
                 entry: './test/input/scss.js'
             }
             config.module.rules[0].use[0].options.noquotes = false
@@ -239,7 +239,7 @@ describe('svg-url-loader', function() {
 
         it('should convert SVG file to utf-8 encoded data-uri string, when embedded in CSS file', function(done) {
             const config = {
-                ...globalConfig,
+                ...getBaseWebpackConfig(),
                 entry: './test/input/css.js'
             }
             config.module.rules[0].use[0].options.noquotes = false
@@ -272,7 +272,7 @@ describe('svg-url-loader', function() {
     describe('"iesafe" option skips styled files encoded to more than 4kB', function () {
         it('should encode file below limit', function(done) {
             const config = {
-                ...globalConfig,
+                ...getBaseWebpackConfig(),
                 entry: './test/input/4047B-encoded-styled.js'
             }
             config.module.rules[0].use[0].options.iesafe = true
@@ -292,7 +292,7 @@ describe('svg-url-loader', function() {
 
         it('should encode file above limit without style-element', function(done) {
             const config = {
-                ...globalConfig,
+                ...getBaseWebpackConfig(),
                 entry: './test/input/4104B-encoded-unstyled.js'
             }
             config.module.rules[0].use[0].options.iesafe = true
@@ -312,7 +312,7 @@ describe('svg-url-loader', function() {
 
         it('should fall back on file above limit with style-element', function(done) {
             const config = {
-                ...globalConfig,
+                ...getBaseWebpackConfig(),
                 entry: './test/input/4099B-encoded-styled.js'
             }
             config.module.rules[0].use[0].options.iesafe = true
@@ -331,7 +331,7 @@ describe('svg-url-loader', function() {
 
         it('should fall back on file above limit with style-element even when base64 encoding', function(done) {
             const config = {
-                ...globalConfig,
+                ...getBaseWebpackConfig(),
                 entry: './test/input/4099B-encoded-styled.js'
             }
             config.module.rules[0].use[0].options.iesafe = true
@@ -353,7 +353,7 @@ describe('svg-url-loader', function() {
     describe("encoding is base64", function() {
         it('should convert SVG file to base64 encoded data-uri string', function(done) {
             const config = {
-                ...globalConfig,
+                ...getBaseWebpackConfig(),
                 entry: './test/input/icon.js'
             }
             config.module.rules[0].use[0].options.encoding = "base64"
