@@ -4,6 +4,8 @@ const webpack = require('webpack')
 
 jest.setTimeout(10000)
 
+const svgUrlLoader = path.resolve(__dirname, '../src/loader.js')
+
 describe('svg-url-loader', function() {
     
     const outputDir = path.resolve(__dirname, './output'),
@@ -11,7 +13,7 @@ describe('svg-url-loader', function() {
         getBundleFile = function() {
             return path.join(outputDir, bundleFileName)
         }
-    const svgUrlLoader = path.resolve(__dirname, '../')
+    
     const globalConfig = {
         context: path.resolve(__dirname, '../'),
         mode: 'development',
