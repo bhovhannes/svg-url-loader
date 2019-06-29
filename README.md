@@ -16,11 +16,6 @@ Parameters can be passed both in a url or from webpack config file. See [Loaders
 
 The loader supports the following parameters:
 
-### `noquotes`
-
-Passing this parameter (or setting to `true`) tells to loader *not to include* resulting string in quotes. This can be useful if one wants to use data-url for SVG image as a value for JavaScript variable.
-
-
 ### `limit`
 
 If given will tell the loader not to encode the source file if its content is greater than this limit.
@@ -72,10 +67,7 @@ require('svg-url-loader?encoding=base64!./file.svg');
 ### In JS:
 ``` javascript
 require('svg-url-loader!./file.svg');
-// => DataUrl for file.svg, enclosed in quotes
-
-require('svg-url-loader?noquotes!./file.svg');
-// => DataUrl for file.svg, without quotes
+// => DataUrl for file.svg
 ```
 
 ### In CSS (with webpack.config.js below):

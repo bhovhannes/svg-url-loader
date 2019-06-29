@@ -46,9 +46,9 @@ module.exports = function(content) {
 		}
 
 		if (!(query.iesafe && hasStyleElement && data.length > 4096)) {
-			if (query.encoding === "none" && !query.noquotes) {
-				data = '"'+data+'"';
-			}
+			// if (query.encoding === "none" && !query.noquotes) {
+			// 	data = '"'+data+'"';
+			// }
 
 			return 'module.exports = ' + JSON.stringify(data);
 		}

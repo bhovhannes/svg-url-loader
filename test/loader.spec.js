@@ -44,48 +44,6 @@ describe('svg-url-loader', function() {
     })
 
 
-    describe('"noquotes" option', function () {
-        it('should convert SVG file to utf-8 encoded data-uri string, enclosed in quotes', function(done) {
-            const config = {
-                ...getBaseWebpackConfig(),
-                entry: './test/input/icon.js'
-            }
-            config.module.rules[0].use[0].options.noquotes = false
-            webpack(config, function(err) {
-                expect(err).toBeNull()
-                fs.readFile(getBundleFile(), function(err, data) {
-                    expect(err).toBeNull()
-                    const encoded = eval(data.toString())
-                    expect(encoded.indexOf('"')).toBe(0)
-                    expect(encoded.lastIndexOf('"')).toBe(encoded.length - 1)
-                    expect(encoded.indexOf('data:image/svg+xml,%3Csvg')).toBe(1)
-                    return done()
-                })
-            })
-        })
-
-
-        it('should not enclose output in quotes if \'noquotes\' option is specified', function(done) {
-            const config = {
-                ...getBaseWebpackConfig(),
-                entry: './test/input/icon.js'
-            }
-            config.module.rules[0].use[0].options.noquotes = true
-
-            webpack(config, function(err) {
-                expect(err).toBeNull()
-                fs.readFile(getBundleFile(), function(err, data) {
-                    expect(err).toBeNull()
-                    const encoded = eval(data.toString())
-                    expect(encoded.indexOf('data:image/svg+xml,%3Csvg')).toBe(0)
-                    expect(encoded.lastIndexOf('svg%3E')).toBe(encoded.length - 'svg%3E'.length)
-                    return done()
-                })
-            })
-        })
-    })
-
-
     describe('"stripdeclarations" option', function () {
         it('if turned off - should do nothing to an SVG that has an XML declaration', function(done) {
             const config = {
@@ -117,9 +75,7 @@ describe('svg-url-loader', function() {
                 fs.readFile(getBundleFile(), function(err, data) {
                     expect(err).toBeNull()
                     const encoded = eval(data.toString())
-                    expect(encoded.indexOf('"')).toBe(0)
-                    expect(encoded.lastIndexOf('"')).toBe(encoded.length - 1)
-                    expect(encoded.indexOf('data:image/svg+xml,%3Csvg')).toBe(1)
+                    expect(encoded.indexOf('data:image/svg+xml,%3Csvg')).toBe(0)
                     return done()
                 })
             })
@@ -139,7 +95,7 @@ describe('svg-url-loader', function() {
                     expect(err).toBeNull()
                     const encoded = eval(data.toString())
                     expect(encoded.indexOf('%3C?xml version="1.0" encoding="UTF-8"?%3E')).toBe(-1)
-                    expect(encoded.indexOf('data:image/svg+xml,%3Csvg')).toBe(1)
+                    expect(encoded.indexOf('data:image/svg+xml,%3Csvg')).toBe(0)
                     return done()
                 })
             })
@@ -176,7 +132,6 @@ describe('svg-url-loader', function() {
                 ...getBaseWebpackConfig(),
                 entry: './test/input/less.js'
             }
-            config.module.rules[0].use[0].options.noquotes = false
             config.module.rules.push({
                 test: /\.less$/,
                 use: [
@@ -209,7 +164,6 @@ describe('svg-url-loader', function() {
                 ...getBaseWebpackConfig(),
                 entry: './test/input/scss.js'
             }
-            config.module.rules[0].use[0].options.noquotes = false
             config.module.rules.push({
                 test: /\.scss$/,
                 use: [
@@ -242,7 +196,6 @@ describe('svg-url-loader', function() {
                 ...getBaseWebpackConfig(),
                 entry: './test/input/css.js'
             }
-            config.module.rules[0].use[0].options.noquotes = false
             config.module.rules.push({
                 test: /\.css$/,
                 use: [
@@ -276,8 +229,7 @@ describe('svg-url-loader', function() {
                 entry: './test/input/4047B-encoded-styled.js'
             }
             config.module.rules[0].use[0].options.iesafe = true
-            config.module.rules[0].use[0].options.noquotes = true
-
+            
             webpack(config, function(err) {
                 expect(err).toBeNull()
                 fs.readFile(getBundleFile(), function(err, data) {
@@ -296,8 +248,7 @@ describe('svg-url-loader', function() {
                 entry: './test/input/4104B-encoded-unstyled.js'
             }
             config.module.rules[0].use[0].options.iesafe = true
-            config.module.rules[0].use[0].options.noquotes = true
-
+            
             webpack(config, function(err) {
                 expect(err).toBeNull()
                 fs.readFile(getBundleFile(), function(err, data) {
