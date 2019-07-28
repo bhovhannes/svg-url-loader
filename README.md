@@ -85,7 +85,13 @@ module.exports = {
 			    test: /\.svg/,
 			    use: {
 			        loader: 'svg-url-loader',
-			        options: {}
+			        options: {
+				        // => Optional supported parameters, see above
+				        stripdeclarations: true,
+				        encoding: 'base64',
+				        iesafe: true
+				        // ...
+			        }
 			    }
 			}
 		]
