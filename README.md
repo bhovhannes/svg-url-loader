@@ -85,13 +85,52 @@ module.exports = {
 			    test: /\.svg/,
 			    use: {
 			        loader: 'svg-url-loader',
+			        options: {}
+			    }
+			}
+		]
+	},
+	//...
+};
+```
+
+### Additional Scenarios
+Scenario 1
+> Alice is using a CSS Extractor and her images are not loading successfully. In the loader, she should apply the ```encoding``` parameter with a value of ```'base64'``` to ensure quotes are added to her url(...) call.
+``` javascript
+module.exports = {
+  //...
+	module: {
+		rules: [
+			{
+			    test: /\.svg/,
+			    use: {
+			        loader: 'svg-url-loader',
 			        options: {
-				        // => Optional supported parameters, see above
-				        stripdeclarations: true,
-				        encoding: 'base64',
-				        iesafe: true
-				        // ...
-			        }
+				          encoding: 'base64'
+		        	}
+			    }
+			}
+		]
+	},
+	//...
+};
+```
+
+Scenario 2
+> John needs to support IE and is seeing black fill-color for his styled shapes. In the loader, he should apply the ```iesafe``` parameter with a value of ```true``` to default back to the file-loader.
+``` javascript
+module.exports = {
+  //...
+	module: {
+		rules: [
+			{
+			    test: /\.svg/,
+			    use: {
+			        loader: 'svg-url-loader',
+			        options: {
+				          iesafe: true
+		        	}
 			    }
 			}
 		]
