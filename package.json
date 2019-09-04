@@ -9,8 +9,8 @@
     "coverage": "cat coverage/*/lcov.info | codecov"
   },
   "dependencies": {
-    "file-loader": "4.2.0",
-    "loader-utils": "1.2.3"
+    "file-loader": "~4.2.0",
+    "loader-utils": "~1.2.3"
   },
   "repository": {
     "type": "git",
