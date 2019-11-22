@@ -1,6 +1,6 @@
 {
   "name": "svg-url-loader",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Converts SVG file to utf-8 encoded data-uri string",
   "main": "./index.js",
   "scripts": {
