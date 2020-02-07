@@ -9,7 +9,7 @@
     "coverage": "cat coverage/*/lcov.info | codecov"
   },
   "dependencies": {
-    "file-loader": "~5.0.0",
+    "file-loader": "~5.0.2",
     "loader-utils": "~1.2.3"
   },
   "repository": {
@@ -32,13 +32,13 @@
   },
   "homepage": "https://github.com/bhovhannes/svg-url-loader#readme",
   "devDependencies": {
-    "codecov": "3.6.1",
-    "css-loader": "3.2.0",
-    "jest": "24.9.0",
+    "codecov": "3.6.4",
+    "css-loader": "3.4.2",
+    "jest": "25.1.0",
     "less": "3.10.3",
     "less-loader": "5.0.0",
-    "node-sass": "4.13.0",
-    "sass-loader": "8.0.0",
-    "webpack": "4.41.2"
+    "node-sass": "4.13.1",
+    "sass-loader": "8.0.2",
+    "webpack": "4.41.5"
   }
 }

@@ -8,7 +8,7 @@ notifications:
     on_success: change
 
 node_js:
-  - "8"
+  - "10"
   - "lts/*"
 
 after_success: npm run coverage
