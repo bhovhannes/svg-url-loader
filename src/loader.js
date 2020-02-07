@@ -55,7 +55,10 @@ module.exports = function(content) {
 	}
 
 	var fileLoader = require('file-loader');
-	return fileLoader.call(this, content);
+	var childContext = Object.create(this)
+	childContext.query = Object.assign({}, query)
+	childContext.query.esModule = false
+	return fileLoader.call(childContext, content);
 };
 
 module.exports.raw = true;
