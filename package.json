@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "file-loader": "~5.0.2",
-    "loader-utils": "~1.2.3"
+    "loader-utils": "~1.4.0"
   },
   "repository": {
     "type": "git",
