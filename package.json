@@ -34,7 +34,7 @@
   "devDependencies": {
     "codecov": "3.6.5",
     "css-loader": "3.5.3",
-    "jest": "25.3.0",
+    "jest": "25.4.0",
     "less": "3.11.1",
     "less-loader": "5.0.0",
     "node-sass": "4.13.1",
