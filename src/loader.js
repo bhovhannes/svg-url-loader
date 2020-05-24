@@ -42,14 +42,9 @@ module.exports = function(content) {
 			});
 
 			data = 'data:image/svg+xml,' + newContent.trim();
-
 		}
 
 		if (!(query.iesafe && hasStyleElement && data.length > 4096)) {
-			// if (query.encoding === "none" && !query.noquotes) {
-			// 	data = '"'+data+'"';
-			// }
-
 			return 'module.exports = ' + JSON.stringify(data);
 		}
 	}
