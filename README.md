@@ -12,15 +12,15 @@ There are some benefits for choosing utf-8 encoding over base64.
 
 ## Supported parameters
 
-Parameters can be passed both in a url or from webpack config file. See [Loaders](https://webpack.js.org/concepts/loaders/) section in webpack documentation for more details.
+Parameters can be passed both in an url or from webpack config file. See [Loaders](https://webpack.js.org/concepts/loaders/) section in webpack documentation for more details.
 
 The loader supports the following parameters:
 
 ### `limit`
 
-If given will tell the loader not to encode the source file if its content is greater than this limit.
+If given, loader will not encode the source file if its content is greater than this limit.
 Defaults to no limit.
-If the file is greater than the limit the [`file-loader`](https://github.com/webpack-contrib/file-loader) is used and all query parameters are passed to it.
+If the file is greater than the limit the [`file-loader`](https://github.com/webpack-contrib/file-loader) is used, receiving all query parameters set for svg-url-loader.
 
 ``` javascript
 require('svg-url-loader?limit=1024!./file.svg');
@@ -52,7 +52,7 @@ require('svg-url-loader?iesafe!./file.svg');
 
 ### `encoding`
 
-This option controls which encoding to use when constructing a data-URI for an SVG. When set to a non-"none" value, quotes are never applied to the outputted data-URI. 
+This option controls which encoding to use when constructing a data-URI for an SVG. When set to a non-"none" value, loader does not apply quotes to the resulting data-URI. 
 
 Possible values are "base64" and "none". Defaults to "none".
 
@@ -73,43 +73,48 @@ require('svg-url-loader!./file.svg');
 ### In CSS (with webpack.config.js below):
 ``` css
 .icon {
-    background: url('../images/file.svg');
+  background: url('../images/file.svg');
 }
 ```
 ``` javascript
 module.exports = {
   //...
-	module: {
-		rules: [
-			{
-			    test: /\.svg/,
-			    use: {
-			        loader: 'svg-url-loader',
-			        options: {}
-			    }
-			}
-		]
-	},
-	//...
+  module: {
+    rules: [
+      {
+        test: /\.svg/,
+        use: {
+          loader: 'svg-url-loader',
+          options: {}
+        }
+      }
+    ]
+  },
+  //...
 };
 ```
+
+## Benefits of using data-uri
+
+1. Browser won't make an extra http call to download the image
+2. Some folks [mentioned](https://github.com/bhovhannes/svg-url-loader/issues/341) that even if image is in browser cache images with data url appear on screen faster.
 
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
 
-[deps-image]: https://img.shields.io/david/bhovhannes/svg-url-loader.svg
+[deps-image]: https://img.shields.io/david/bhovhannes/svg-url-loader.svg?style=flat-square
 [deps-url]: https://david-dm.org/bhovhannes/svg-url-loader
 
-[dev-deps-image]: https://img.shields.io/david/dev/bhovhannes/svg-url-loader.svg
+[dev-deps-image]: https://img.shields.io/david/dev/bhovhannes/svg-url-loader.svg?style=flat-square
 [dev-deps-url]: https://david-dm.org/bhovhannes/svg-url-loader#info=devDependencies
 
-[license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat
+[license-image]: http://img.shields.io/badge/license-MIT-blue.svg?style=flat-square
 [license-url]: LICENSE
 
 [npm-url]: https://www.npmjs.org/package/svg-url-loader
-[npm-version-image]: https://img.shields.io/npm/v/svg-url-loader.svg?style=flat
-[npm-downloads-image]: https://img.shields.io/npm/dm/svg-url-loader.svg?style=flat
+[npm-version-image]: https://img.shields.io/npm/v/svg-url-loader.svg?style=flat-square
+[npm-downloads-image]: https://img.shields.io/npm/dm/svg-url-loader.svg?style=flat-square
 
 [travis-url]: https://travis-ci.com/bhovhannes/svg-url-loader
-[travis-image]: https://img.shields.io/travis/bhovhannes/svg-url-loader.svg?style=flat
+[travis-image]: https://img.shields.io/travis/bhovhannes/svg-url-loader.svg?style=flat-square
