@@ -24,9 +24,10 @@ module.exports = function(content) {
 
 		var hasStyleElement = REGEX_STYLE.test(newContent)
 
-		if (query.stripdeclarations) {
+		if (!('stripdeclarations' in query) || query.stripdeclarations) {
 			newContent = newContent.replace(REGEX_DECLARATION, "");
 		}
+		newContent = newContent.replace(REGEX_MULTIPLE_SPACES, " ");
 
 		var data;
 		if (query.encoding === "base64") {
@@ -36,7 +37,6 @@ module.exports = function(content) {
 			data = "data:image/svg+xml;base64," + newContent.toString("base64");
 		} else {
 			newContent = newContent.replace(REGEX_DOUBLE_QUOTE, "'");
-			newContent = newContent.replace(REGEX_MULTIPLE_SPACES, " ");
 			newContent = newContent.replace(REGEX_UNSAFE_CHARS, function(match) {
 				return '%'+match[0].charCodeAt(0).toString(16).toUpperCase();
 			});

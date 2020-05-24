@@ -33,6 +33,9 @@ require('svg-url-loader?prefix=img/!./file.svg');
 
 ### `stripdeclarations`
 
+This option is true by default. **It will be removed in the next major release.**  
+See [this issue](https://github.com/bhovhannes/svg-url-loader/issues/104#issuecomment-348377933) for more context about this decision.
+
 If given will tell the loader to strip out any XML declaration, e.g. `<?xml version="1.0" encoding="UTF-8"?>` at the beginning of imported SVGs.
 Internet Explorer (tested in Edge 14) cannot handle XML declarations in CSS data URLs (`content: url("data:image/svg...")`).
 
