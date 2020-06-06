@@ -3329,7 +3329,24 @@ less-loader@6.1.0:
     loader-utils "^2.0.0"
     schema-utils "^2.6.6"
 
-less@3.11.1, less@^3.11.1:
+less@3.11.3:
+  version "3.11.3"
+  resolved "https://registry.yarnpkg.com/less/-/less-3.11.3.tgz#2d853954fcfe0169a8af869620bcaa16563dcc1c"
+  integrity sha512-VkZiTDdtNEzXA3LgjQiC3D7/ejleBPFVvq+aRI9mIj+Zhmif5TvFPM244bT4rzkvOCvJ9q4zAztok1M7Nygagw==
+  dependencies:
+    clone "^2.1.2"
+    tslib "^1.10.0"
+  optionalDependencies:
+    errno "^0.1.1"
+    graceful-fs "^4.1.2"
+    image-size "~0.5.0"
+    make-dir "^2.1.0"
+    mime "^1.4.1"
+    promise "^7.1.1"
+    request "^2.83.0"
+    source-map "~0.6.0"
+
+less@^3.11.1:
   version "3.11.1"
   resolved "https://registry.yarnpkg.com/less/-/less-3.11.1.tgz#c6bf08e39e02404fe6b307a3dfffafdc55bd36e2"
   integrity sha512-tlWX341RECuTOvoDIvtFqXsKj072hm3+9ymRBe76/mD6O5ZZecnlAOVDlWAleF2+aohFrxNidXhv2773f6kY7g==
@@ -3446,7 +3463,7 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
-make-dir@^2.0.0:
+make-dir@^2.0.0, make-dir@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-2.1.0.tgz#5f0310e18b8be898cc07009295a30ae41e91e6f5"
   integrity sha512-LS9X+dc8KLxXCb8dni79fLIIUA5VyZoyjSMCwTluaXA0o27cCK0bhXkpgw+sTXVpPy/lSO57ilRixqk0vDmtRA==
