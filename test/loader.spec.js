@@ -18,6 +18,7 @@ describe('svg-url-loader', function() {
     const getBaseWebpackConfig = () => ({
         context,
         mode: 'development',
+        devtool: false,
 		output: {
             path: outputDir,
             filename: bundleFileName
