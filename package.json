@@ -9,7 +9,7 @@
     "coverage": "cat coverage/*/lcov.info | codecov"
   },
   "dependencies": {
-    "file-loader": "~6.1.0",
+    "file-loader": "~6.2.0",
     "loader-utils": "~2.0.0"
   },
   "peerDependencies": {
