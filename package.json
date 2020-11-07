@@ -35,7 +35,7 @@
   },
   "homepage": "https://github.com/bhovhannes/svg-url-loader#readme",
   "devDependencies": {
-    "codecov": "3.8.0",
+    "codecov": "3.8.1",
     "css-loader": "3.6.0",
     "jest": "26.6.1",
     "less": "3.12.2",
