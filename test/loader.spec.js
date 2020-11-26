@@ -37,6 +37,11 @@ describe("svg-url-loader", function () {
     },
   });
 
+  function bundleContainsEncodedSvg(evaluatedBundle) {
+    const v = evaluatedBundle.default.toString();
+    return v.includes('background-image: url("data:image/svg+xml,%3Csvg');
+  }
+
   // Clean generated cache files before each test so that we can call each test with an empty state.
   afterEach(function (done) {
     fs.unlink(getBundleFile(), done);
@@ -144,18 +149,7 @@ describe("svg-url-loader", function () {
         fs.readFile(getBundleFile(), function (err, data) {
           expect(err).toBeNull();
           const encoded = eval(data.toString());
-          let found = false;
-          for (let i = 0; i < encoded[0].length; ++i) {
-            const v = encoded[0][i];
-            if (
-              typeof v === "string" &&
-              v.indexOf('background-image: url("data:image/svg+xml,%3Csvg') !==
-                -1
-            ) {
-              found = true;
-            }
-          }
-          expect(found).toBe(true);
+          expect(bundleContainsEncodedSvg(encoded)).toBe(true);
           return done();
         });
       });
@@ -176,18 +170,7 @@ describe("svg-url-loader", function () {
         fs.readFile(getBundleFile(), function (err, data) {
           expect(err).toBeNull();
           const encoded = eval(data.toString());
-          let found = false;
-          for (let i = 0; i < encoded[0].length; ++i) {
-            const v = encoded[0][i];
-            if (
-              typeof v === "string" &&
-              v.indexOf('background-image: url("data:image/svg+xml,%3Csvg') !==
-                -1
-            ) {
-              found = true;
-            }
-          }
-          expect(found).toBe(true);
+          expect(bundleContainsEncodedSvg(encoded)).toBe(true);
           return done();
         });
       });
@@ -208,18 +191,7 @@ describe("svg-url-loader", function () {
         fs.readFile(getBundleFile(), function (err, data) {
           expect(err).toBeNull();
           const encoded = eval(data.toString());
-          let found = false;
-          for (let i = 0; i < encoded[0].length; ++i) {
-            const v = encoded[0][i];
-            if (
-              typeof v === "string" &&
-              v.indexOf('background-image: url("data:image/svg+xml,%3Csvg') !==
-                -1
-            ) {
-              found = true;
-            }
-          }
-          expect(found).toBe(true);
+          expect(bundleContainsEncodedSvg(encoded)).toBe(true);
           return done();
         });
       });
