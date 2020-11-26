@@ -1,2 +1,2 @@
-var less = require('./styles/background.less');
+var less = require("./styles/background.less");
 module.exports = less;
