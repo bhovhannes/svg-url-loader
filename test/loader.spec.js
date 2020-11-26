@@ -117,7 +117,11 @@ describe("svg-url-loader", function () {
         fs.readFile(getBundleFile(), function (err, data) {
           expect(err).toBeNull();
           const encoded = eval(data.toString());
-          expect(encoded).toBe("foo.svg");
+          expect(encoded).toEqual(
+            expect.objectContaining({
+              default: "foo.svg",
+            })
+          );
           return done();
         });
       });
@@ -274,7 +278,11 @@ describe("svg-url-loader", function () {
         fs.readFile(getBundleFile(), function (err, data) {
           expect(err).toBeNull();
           const encoded = eval(data.toString());
-          expect(encoded).toBe("foo.svg");
+          expect(encoded).toEqual(
+            expect.objectContaining({
+              default: "foo.svg",
+            })
+          );
           return done();
         });
       });
@@ -294,7 +302,11 @@ describe("svg-url-loader", function () {
         fs.readFile(getBundleFile(), function (err, data) {
           expect(err).toBeNull();
           const encoded = eval(data.toString());
-          expect(encoded).toBe("foo.svg");
+          expect(encoded).toEqual(
+            expect.objectContaining({
+              default: "foo.svg",
+            })
+          );
           return done();
         });
       });

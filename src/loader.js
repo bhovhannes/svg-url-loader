@@ -48,7 +48,7 @@ module.exports = function (content) {
   const fileLoader = require("file-loader");
   const childContext = Object.create(this);
   childContext.query = Object.assign({}, query);
-  childContext.query.esModule = false;
+  // childContext.query.esModule = false;
   return fileLoader.call(childContext, content);
 };
 
