@@ -1,3 +1,4 @@
+const { describe, it, afterEach, expect } = require("@jest/globals");
 const fs = require("fs");
 const path = require("path");
 const webpack = require("webpack");

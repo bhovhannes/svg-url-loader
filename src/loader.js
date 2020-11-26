@@ -28,7 +28,7 @@ module.exports = function (content) {
     let data;
     if (query.encoding === "base64") {
       if (typeof newContent === "string") {
-        newContent = new Buffer(newContent);
+        newContent = Buffer.from(newContent);
       }
       data = "data:image/svg+xml;base64," + newContent.toString("base64");
     } else {
@@ -47,10 +47,8 @@ module.exports = function (content) {
 
   const fileLoader = require("file-loader");
   const childContext = Object.create(this);
-  childContext.query = {
-    ...query,
-    esModule: false,
-  };
+  childContext.query = Object.assign({}, query);
+  childContext.query.esModule = false;
   return fileLoader.call(childContext, content);
 };
 
