@@ -1,0 +1,25 @@
+name: Checks
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x]
+
+    steps:
+      - uses: actions/checkout@v2
+        name: Use Node.js ${{ matrix.node-version }}
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: npm test -- --ci
+      - uses: codecov/codecov-action@v1
+        with:
+          directory: ./coverage/
+          fail_ci_if_error: true
+          path_to_write_report: ./coverage/codecov_report.txt

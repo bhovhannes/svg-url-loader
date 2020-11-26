@@ -1,2 +1,2 @@
-var icon = require('./images/icon-with-declaration.svg');
+var icon = require("./images/icon-with-declaration.svg");
 module.exports = icon;
