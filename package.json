@@ -9,8 +9,8 @@
   ],
   "scripts": {
     "format": "prettier --write '**/*.{ts,tsx,js,jsx,css,md,yml}'",
-    "test": "jest --coverage",
-    "test-watch": "jest --watch"
+    "test": "jest --runInBand --coverage",
+    "test-watch": "jest --runInBand --watch"
   },
   "dependencies": {
     "file-loader": "~6.2.0",
