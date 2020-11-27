@@ -251,5 +251,17 @@ describe("svg-url-loader", function () {
       expect(encoded).not.toContain('"');
       expect(encoded.startsWith("data:image/svg+xml;base64")).toBe(true);
     });
+
+    it("supports passing options using resource query", async () => {
+      const config = {
+        ...getBaseWebpackConfig(),
+        entry: "./test/input/icon-resource-query.js",
+      };
+
+      await runWebpack(config);
+      const encoded = await evaluateGeneratedBundle();
+      expect(encoded).not.toContain('"');
+      expect(encoded.startsWith("data:image/svg+xml;base64")).toBe(true);
+    });
   });
 });

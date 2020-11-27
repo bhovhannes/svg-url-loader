@@ -16,6 +16,14 @@ There are some benefits for choosing utf-8 encoding over base64.
 
 Parameters can be passed both in an url or from webpack config file. See [Loaders](https://webpack.js.org/concepts/loaders/) section in webpack documentation for more details.
 
+Passing parameters using `resourceQuery` is also supported:
+
+```css
+.selector {
+  background-image: url(../assets/foo.svg?encoding=base64);
+}
+```
+
 The loader supports the following parameters:
 
 ### `limit`

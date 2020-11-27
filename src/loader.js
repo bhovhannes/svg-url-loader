@@ -1,4 +1,4 @@
-const { getOptions } = require("loader-utils");
+const { getOptions, parseQuery } = require("loader-utils");
 
 const REGEX_STYLE = /<style[\s\S]*?>[\s\S]*?<\/style>/i;
 const REGEX_DECLARATION = /^\s*<\?xml [^>]*>\s*/i;
@@ -10,8 +10,13 @@ const REGEX_UNSAFE_CHARS = /[{}\|\\\^~\[\]`"<>#%]/g;
 module.exports = function (content) {
   this.cacheable && this.cacheable();
 
-  let query = getOptions(this) || {};
-  query.encoding = query.encoding || "none";
+  let query = {
+    ...{
+      encoding: "none",
+    },
+    ...getOptions(this),
+    ...(this.resourceQuery ? parseQuery(this.resourceQuery) : undefined),
+  };
 
   let limit = query.limit ? parseInt(query.limit, 10) : 0;
 
