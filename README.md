@@ -47,12 +47,38 @@ require("svg-url-loader?stripdeclarations!./file.svg");
 
 ### `iesafe`
 
-This option falls back to the file-loader if the file contains a style-element and the encoded size is above 4kB no matter the `limit` specified.
+This option tells loader to fall back to the file-loader if the file contains a style-element and the encoded size is above 4kB no matter the `limit` specified.
 
-Internet Explorer (including IE11) stops parsing style-elements in SVG data-URIs longer than 4kB. This results in black fill-color for all styled shapes.
+This option was introduced because Internet Explorer (including IE11) stops parsing style-elements in SVG data-URIs longer than 4kB. This results in black fill-color for all styled shapes.
+
+You can either specify `iesafe` option in the query:
 
 ```javascript
-require("svg-url-loader?iesafe!./file.svg");
+// apply `iesafe` option only for 'foo.svg'
+require("svg-url-loader?iesafe!./foo.svg");
+```
+
+Or, you can set this option globally in you webpack config:
+
+```javascript
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        test: /\.svg/,
+        use: {
+          loader: "svg-url-loader",
+          options: {
+            // make all svg images to work in IE
+            iesafe: true,
+          },
+        },
+      },
+    ],
+  },
+  //...
+};
 ```
 
 ### `encoding`
@@ -61,8 +87,36 @@ This option controls which encoding to use when constructing a data-URI for an S
 
 Possible values are "base64" and "none". Defaults to "none".
 
+Normally, setting `encoding` option to `base64` _should not_ be required, as using base64 encoding defeats the original purpose of this loader - embed svg with minimal size overhead. However, because of incompatibility with some tools, we support this mode, too.
+
+You can either specify `base64` option in the query:
+
 ```javascript
-require("svg-url-loader?encoding=base64!./file.svg");
+// apply `base64` option only for 'foo.svg'
+require("svg-url-loader?encoding=base64!./foo.svg");
+```
+
+Or, you can set this option globally in you webpack config:
+
+```javascript
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        test: /\.svg/,
+        use: {
+          loader: "svg-url-loader",
+          options: {
+            // make loader to behave like url-loader, for all svg files
+            encoding: "base64",
+          },
+        },
+      },
+    ],
+  },
+  //...
+};
 ```
 
 ## Usage
