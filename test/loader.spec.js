@@ -1,21 +1,19 @@
 const { describe, it, afterEach, expect } = require("@jest/globals");
-const fs = require("fs");
-const { promises: fsPromises } = require("fs");
+const fsPromises = require("fs").promises;
 const path = require("path");
 const webpack = require("webpack");
 
-describe("svg-url-loader", function () {
-  const svgUrlLoader = path.resolve(__dirname, "../src/loader.js");
+const svgUrlLoader = path.resolve(__dirname, "../index.js");
+const context = path.resolve(__dirname, "../");
+const outputDir = path.resolve(__dirname, "./output");
+const bundleFileName = "bundle.js";
 
-  const outputDir = path.resolve(__dirname, "./output"),
-    bundleFileName = "bundle.js",
-    getBundleFile = function () {
-      return path.join(outputDir, bundleFileName);
-    };
+function getBundleFile() {
+  return path.join(outputDir, bundleFileName);
+}
 
-  const context = path.resolve(__dirname, "../");
-
-  const getBaseWebpackConfig = () => ({
+function getBaseWebpackConfig() {
+  return {
     context,
     mode: "development",
     output: {
@@ -36,30 +34,28 @@ describe("svg-url-loader", function () {
         },
       ],
     },
-  });
+  };
+}
 
-  function bundleContainsEncodedSvg(evaluatedBundle) {
-    const v = evaluatedBundle.default.toString();
-    return v.includes('background-image: url("data:image/svg+xml,%3Csvg');
-  }
-
-  async function runWebpack(config) {
-    return new Promise((resolve, reject) => {
-      webpack(config, function (err, data) {
-        if (err) {
-          reject(err);
-        }
+async function runWebpack(config) {
+  return new Promise((resolve, reject) => {
+    webpack(config, function (err, data) {
+      if (err) {
+        reject(err);
+      } else {
         resolve(data);
-      });
+      }
     });
-  }
+  });
+}
 
-  async function evaluateGeneratedBundle() {
-    const buffer = await fsPromises.readFile(getBundleFile());
-    const content = buffer.toString();
-    return eval(content);
-  }
+async function evaluateGeneratedBundle() {
+  const buffer = await fsPromises.readFile(getBundleFile());
+  const content = buffer.toString();
+  return eval(content);
+}
 
+describe("svg-url-loader", function () {
   // Clean generated cache files before each test so that we can call each test with an empty state.
   afterEach(async () => {
     await fsPromises.unlink(getBundleFile());
