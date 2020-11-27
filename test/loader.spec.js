@@ -57,9 +57,7 @@ async function evaluateGeneratedBundle() {
 
 describe("svg-url-loader", function () {
   // Clean generated cache files before each test so that we can call each test with an empty state.
-  afterEach(async () => {
-    await fsPromises.unlink(getBundleFile());
-  });
+  afterEach(() => fsPromises.unlink(getBundleFile()));
 
   describe('"stripdeclarations" option', function () {
     it("if turned off - should do nothing to an SVG that has an XML declaration", async () => {
