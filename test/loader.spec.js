@@ -72,7 +72,7 @@ describe("svg-url-loader", function () {
 
       await runWebpack(config);
       const encoded = await evaluateGeneratedBundle();
-      expect(encoded).toContain("%3C?xml version='1.0' encoding='UTF-8'?%3E");
+      expect(encoded).toContain("%3c?xml version='1.0' encoding='UTF-8'?%3e");
     });
 
     it("if turned on - should do nothing to an SVG that doesn't have an XML declaration", async () => {
@@ -84,7 +84,7 @@ describe("svg-url-loader", function () {
 
       await runWebpack(config);
       const encoded = await evaluateGeneratedBundle();
-      expect(encoded.startsWith("data:image/svg+xml,%3Csvg")).toBe(true);
+      expect(encoded.startsWith("data:image/svg+xml,%3csvg")).toBe(true);
     });
 
     it("if turned on - should remove XML declaration from a file that has one", async () => {
@@ -97,9 +97,9 @@ describe("svg-url-loader", function () {
       await runWebpack(config);
       const encoded = await evaluateGeneratedBundle();
       expect(encoded).not.toContain(
-        '%3C?xml version="1.0" encoding="UTF-8"?%3E'
+        '%3c?xml version="1.0" encoding="UTF-8"?%3e'
       );
-      expect(encoded.startsWith("data:image/svg+xml,%3Csvg")).toBe(true);
+      expect(encoded.startsWith("data:image/svg+xml,%3csvg")).toBe(true);
     });
   });
 
@@ -136,7 +136,7 @@ describe("svg-url-loader", function () {
       await runWebpack(config);
       const encoded = await evaluateGeneratedBundle();
       expect(encoded.default.toString()).toContain(
-        'background-image: url("data:image/svg+xml,%3Csvg'
+        'background-image: url("data:image/svg+xml,%3csvg'
       );
     });
 
@@ -153,7 +153,7 @@ describe("svg-url-loader", function () {
       await runWebpack(config);
       const encoded = await evaluateGeneratedBundle();
       expect(encoded.default.toString()).toContain(
-        'background-image: url("data:image/svg+xml,%3Csvg'
+        'background-image: url("data:image/svg+xml,%3csvg'
       );
     });
 
@@ -170,7 +170,7 @@ describe("svg-url-loader", function () {
       await runWebpack(config);
       const encoded = await evaluateGeneratedBundle();
       expect(encoded.default.toString()).toContain(
-        'background-image: url("data:image/svg+xml,%3Csvg'
+        'background-image: url("data:image/svg+xml,%3csvg'
       );
     });
   });
@@ -185,7 +185,7 @@ describe("svg-url-loader", function () {
 
       await runWebpack(config);
       const encoded = await evaluateGeneratedBundle();
-      expect(encoded.startsWith("data:image/svg+xml,%3Csvg")).toBe(true);
+      expect(encoded.startsWith("data:image/svg+xml,%3csvg")).toBe(true);
       expect(encoded.length).toBeLessThan(4096);
     });
 
@@ -198,7 +198,7 @@ describe("svg-url-loader", function () {
 
       await runWebpack(config);
       const encoded = await evaluateGeneratedBundle();
-      expect(encoded.startsWith("data:image/svg+xml,%3Csvg")).toBe(true);
+      expect(encoded.startsWith("data:image/svg+xml,%3csvg")).toBe(true);
       expect(encoded.length).toBeGreaterThan(4096);
     });
 
