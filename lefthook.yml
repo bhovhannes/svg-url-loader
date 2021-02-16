@@ -1,0 +1,5 @@
+pre-commit:
+  commands:
+    format:
+      glob: '*.{js,ts,tsx,css,md,yml,json}'
+      run: yarn prettier --write {staged_files} && git add {staged_files}
