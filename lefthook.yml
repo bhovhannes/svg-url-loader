@@ -1,5 +1,2 @@
-pre-commit:
-  commands:
-    format:
-      glob: '*.{js,ts,tsx,css,md,yml,json}'
-      run: yarn prettier --write {staged_files} && git add {staged_files}
+extends:
+  - node_modules/@bhovhannes/shared-config/lefthook/pre-commit/format.yml
