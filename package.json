@@ -39,7 +39,7 @@
   },
   "homepage": "https://github.com/bhovhannes/svg-url-loader#readme",
   "devDependencies": {
-    "@arkweid/lefthook": "0.7.6",
+    "@arkweid/lefthook": "0.7.7",
     "@bhovhannes/shared-config": "0.0.1",
     "@jest/globals": "27.2.4",
     "css-loader": "5.2.7",
