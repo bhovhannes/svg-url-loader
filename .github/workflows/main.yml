@@ -18,7 +18,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm test -- --ci
-      - uses: codecov/codecov-action@v2
+      - uses: codecov/codecov-action@v3
         with:
           directory: ./coverage/
           fail_ci_if_error: true
