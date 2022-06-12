@@ -41,9 +41,9 @@
   "devDependencies": {
     "@arkweid/lefthook": "0.7.7",
     "@bhovhannes/shared-config": "0.0.1",
-    "@jest/globals": "28.1.0",
+    "@jest/globals": "28.1.1",
     "css-loader": "5.2.7",
-    "jest": "28.1.0",
+    "jest": "28.1.1",
     "less": "4.1.3",
     "less-loader": "11.0.0",
     "prettier": "2.6.2",
