@@ -7,7 +7,7 @@
   },
   "packageRules": [
     {
-      "packageNames": ["file-loader", "loader-utils"],
+      "packageNames": ["file-loader"],
       "schedule": ["at any time"]
     }
   ]
