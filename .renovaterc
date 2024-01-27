@@ -1,10 +1,5 @@
 {
-  "extends": ["config:base", ":disableDependencyDashboard"],
-  "schedule": ["before 3am every weekend"],
-  "automerge": true,
-  "major": {
-    "automerge": false
-  },
+  "extends": ["github>bhovhannes/shared-config//renovate/default"],
   "packageRules": [
     {
       "packageNames": ["file-loader"],
