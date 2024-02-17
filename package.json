@@ -48,7 +48,7 @@
     "prettier": "3.2.5",
     "sass": "1.70.0",
     "sass-loader": "14.1.0",
-    "webpack": "5.90.1"
+    "webpack": "5.90.2"
   },
   "engines": {
     "node": ">=14"
