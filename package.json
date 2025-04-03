@@ -47,7 +47,7 @@
     "less-loader": "12.2.0",
     "prettier": "3.5.3",
     "sass": "1.86.2",
-    "sass-loader": "16.0.2",
+    "sass-loader": "16.0.5",
     "webpack": "5.98.0"
   },
   "engines": {
