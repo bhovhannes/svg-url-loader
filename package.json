@@ -41,7 +41,7 @@
     "@bhovhannes/shared-config": "0.0.1",
     "@evilmartians/lefthook": "1.11.14",
     "@jest/globals": "30.0.2",
-    "css-loader": "5.2.7",
+    "css-loader": "7.1.2",
     "jest": "30.0.2",
     "less": "4.3.0",
     "less-loader": "12.3.0",
