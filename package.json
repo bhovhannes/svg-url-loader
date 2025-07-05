@@ -40,9 +40,9 @@
   "devDependencies": {
     "@bhovhannes/shared-config": "0.0.1",
     "@evilmartians/lefthook": "1.11.16",
-    "@jest/globals": "30.0.3",
+    "@jest/globals": "30.0.4",
     "css-loader": "5.2.7",
-    "jest": "30.0.3",
+    "jest": "30.0.4",
     "less": "4.3.0",
     "less-loader": "12.3.0",
     "prettier": "3.6.2",
