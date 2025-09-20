@@ -39,7 +39,7 @@
   "homepage": "https://github.com/bhovhannes/svg-url-loader#readme",
   "devDependencies": {
     "@bhovhannes/shared-config": "0.0.1",
-    "@evilmartians/lefthook": "1.13.0",
+    "@evilmartians/lefthook": "1.13.1",
     "@jest/globals": "30.1.2",
     "css-loader": "5.2.7",
     "jest": "30.1.3",
