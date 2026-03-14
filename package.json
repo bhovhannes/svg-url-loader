@@ -43,7 +43,7 @@
     "@jest/globals": "30.2.0",
     "css-loader": "5.2.7",
     "jest": "30.2.0",
-    "less": "4.5.1",
+    "less": "4.6.4",
     "less-loader": "12.3.1",
     "prettier": "3.8.1",
     "sass": "1.94.3",
