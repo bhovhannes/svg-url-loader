@@ -89,6 +89,40 @@ module.exports = {
 };
 ```
 
+### `stripSpaces`
+
+This option is `true` by default.
+
+If set to `false`, the loader will not aggressively minify whitespaces (except newlines and multiple spaces). This is useful when you need to preserve significant whitespace inside SVG `<text>` elements.
+
+You can specify the `stripSpaces` option in the query:
+
+```javascript
+require("svg-url-loader?stripSpaces=false!./file.svg");
+```
+
+Or set it globally in your webpack config:
+
+```javascript
+module.exports = {
+  //...
+  module: {
+    rules: [
+      {
+        test: /\.svg/,
+        use: {
+          loader: "svg-url-loader",
+          options: {
+            stripSpaces: false,
+          },
+        },
+      },
+    ],
+  },
+  //...
+};
+```
+
 ### `encoding`
 
 This option controls which encoding to use when constructing a data-URI for an SVG. When set to a non-"none" value, loader does not apply quotes to the resulting data-URI.
