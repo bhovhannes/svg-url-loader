@@ -4,12 +4,20 @@ const REGEX_MULTIPLE_SPACES = /\s+/g
 const REGEX_DOUBLE_QUOTE = /"/g
 const REGEX_UNSAFE_CHARS = /[{}\|\\\^~\[\]`"<>#%]/g
 
+function parseBoolean(value, defaultValue) {
+  if (typeof value === 'boolean') return value
+  if (value === 'true') return true
+  if (value === 'false') return false
+  return defaultValue
+}
+
 module.exports = function (content) {
   this.cacheable && this.cacheable()
 
   let query = {
     encoding: 'none',
     stripdeclarations: true,
+    stripSpaces: true,
     ...this.getOptions()
   }
 
@@ -20,12 +28,16 @@ module.exports = function (content) {
     }
   }
 
+  query.stripdeclarations = parseBoolean(query.stripdeclarations, true)
+  query.stripSpaces = parseBoolean(query.stripSpaces, true)
+  query.iesafe = parseBoolean(query.iesafe, false)
+
   let limit = query.limit ? parseInt(query.limit, 10) : 0
 
   if (limit <= 0 || content.length < limit) {
     const originalSvgSource = content.toString('utf8')
 
-    const transformedSvgSource = applyGeneralTransforms(originalSvgSource, query.stripdeclarations)
+    const transformedSvgSource = applyGeneralTransforms(originalSvgSource, query.stripdeclarations, query.stripSpaces)
 
     let data
     if (query.encoding === 'base64') {
@@ -57,10 +69,12 @@ function uriEncode(svgSource) {
   return svgSource.trim()
 }
 
-function applyGeneralTransforms(svgSource, stripXmlDeclaration) {
+function applyGeneralTransforms(svgSource, stripXmlDeclaration, stripSpaces) {
   if (stripXmlDeclaration) {
     svgSource = svgSource.replace(REGEX_XML_DECLARATION, '')
   }
-  svgSource = svgSource.replace(REGEX_MULTIPLE_SPACES, ' ')
+  if (stripSpaces) {
+    svgSource = svgSource.replace(REGEX_MULTIPLE_SPACES, ' ')
+  }
   return svgSource
 }

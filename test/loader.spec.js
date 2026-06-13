@@ -70,6 +70,17 @@ describe('svg-url-loader', function () {
       expect(encoded).toContain("%3c?xml version='1.0' encoding='UTF-8'?%3e")
     })
 
+    it('if turned off in resourceQuery - should do nothing to an SVG that has an XML declaration', async () => {
+      const config = {
+        ...getBaseWebpackConfig(),
+        entry: './test/input/icon-with-declaration.js?stripdeclarations=false'
+      }
+
+      const assetName = await runWebpack(config)
+      const encoded = await evaluateGeneratedBundle(assetName)
+      expect(encoded).toContain("%3c?xml version='1.0' encoding='UTF-8'?%3e")
+    })
+
     it("if turned on - should do nothing to an SVG that doesn't have an XML declaration", async () => {
       const config = {
         ...getBaseWebpackConfig(),
@@ -93,6 +104,24 @@ describe('svg-url-loader', function () {
       const encoded = await evaluateGeneratedBundle(assetName)
       expect(encoded).not.toContain('%3c?xml version="1.0" encoding="UTF-8"?%3e')
       expect(encoded.startsWith('data:image/svg+xml,%3csvg')).toBe(true)
+    })
+  })
+
+  describe('"stripSpaces" option', function () {
+    it('if turned off - should preserve extra spaces', async () => {
+      const config = {
+        ...getBaseWebpackConfig(),
+        entry: './test/input/icon.js'
+      }
+      config.module.rules[0].use[0].options.stripSpaces = false
+
+      const assetName = await runWebpack(config)
+      const encoded = await evaluateGeneratedBundle(assetName)
+      // This is a simplified check to ensure it doesn't strip ALL spaces, 
+      // it will still encode spaces as %20 or similar.
+      // If it stripped spaces, it would be a single space, 
+      // and it would likely not contain %0a (newline encoded)
+      expect(encoded).toContain('%0a')
     })
   })
 
